@@ -12,7 +12,9 @@ var MASCOTTES = {
   craft:   { emoji:"🦫", naam:"Bram de Bouwbever", afbeelding:"", zinnen:["Zullen we samen blokjes hakken?","Elke som is een nieuw blokje voor je wereld!","Kom, we gaan bouwen!"] },
   galaxy:  { emoji:"👽", naam:"Kosmo", afbeelding:"", zinnen:["Klaar voor de lancering?","Elke ster die je verdient laat je verder reizen!","Op naar het volgende sterrenstelsel!"] },
   powerup: { emoji:"🍄", naam:"Turbo", afbeelding:"", zinnen:["Pak die power-up en ga ervoor!","Elk goed antwoord is een muntje extra!","Sprong-klaar? Let's go!"] },
-  unicorn: { emoji:"🦄", naam:"Fee", afbeelding:"", zinnen:["Laten we samen dromen waarmaken!","Elk hartje maakt je droomwereld mooier!","Sprankelen maar!"] }
+  unicorn: { emoji:"🦄", naam:"Fee", afbeelding:"", zinnen:["Laten we samen dromen waarmaken!","Elk hartje maakt je droomwereld mooier!","Sprankelen maar!"] },
+  voetbal: { emoji:"🦁", naam:"Leo de Leeuw", afbeelding:"", zinnen:["Klaar voor de wedstrijd?","Elk goed antwoord is een doelpunt!","Kom op, wij scoren dit!"] },
+  zeemeermin: { emoji:"🧜‍♀️", naam:"Merel de Zeemeermin", afbeelding:"", zinnen:["Duik je mee de zee in?","Elke schelp maakt je paleis mooier!","Zwem maar lekker verder!"] }
 };
 
 if (typeof module !== 'undefined') module.exports = MASCOTTES;
