@@ -1,12 +1,12 @@
 /* Blokwereld service worker — cache-first, offline na eerste (https) bezoek.
    CACHE_VERSIE loopt mee met APP_VERSIE zodat een nieuwe versie de oude cache vervangt. */
-var CACHE_VERSIE = "blokwereld-3.19.0";
+var CACHE_VERSIE = "archito-3.32.0";
 var BESTANDEN = [
   "./", "./index.html", "./manifest.json",
   "./data/sommen.js", "./data/woorden.js", "./data/flitswoorden.js",
   "./data/memory.js", "./data/talen.js", "./data/denken.js", "./data/beelddenken.js",
   "./data/beeldlab.js", "./data/mascottes.js", "./data/wezens.js",
-  "./data/missies.js", "./data/stickers.js", "./data/lezen.js", "./data/creatief.js",
+  "./data/missies.js", "./data/stickers.js", "./data/lezen.js", "./data/oudertips.js", "./data/creatief.js",
   "./icons/icon-192.png", "./icons/icon-512.png"
 ];
 

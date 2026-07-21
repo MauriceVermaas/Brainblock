@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
 <meta name="theme-color" content="#4a7c3a">
-<title>Blokwereld</title>
+<title>Archito</title>
 <meta name="description" content="Nederlandstalige leerapp voor beelddenkers: rekenen, spelling, lezen, talen en kritisch denken met een bouw-beloningslus.">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
@@ -12,7 +12,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Blokwereld">
+<meta name="apple-mobile-web-app-title" content="Archito">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Lexend:wght@400;500;700&family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -122,7 +122,7 @@ main{max-width:760px; margin:0 auto; padding:1em}
 body{ background-attachment:fixed; }
 /* pastel-was over de themakleuren zodat alles zachter oogt */
 body::before{ content:""; position:fixed; inset:0; background:radial-gradient(120% 90% at 50% 0%, #ffffff44, #ffffff00 60%); pointer-events:none; z-index:0; }
-main, #hud, .overlay{ position:relative; z-index:1; }
+main, #hud{ position:relative; z-index:1; }   /* .overlay NIET hier: die moet position:fixed blijven (gecentreerde pop-up) */
 h1,h2,h3{ text-shadow:0 2px 0 rgba(0,0,0,.06); }
 button,.knop{
   border-radius:22px; font-weight:700;
@@ -147,7 +147,7 @@ button:active,.knop:active{ box-shadow:0 2px 0 var(--schaduw), 0 4px 8px rgba(0,
 #memGrid .ico{ font-size:3rem; }
 .beeldprompt .gat{ opacity:1; filter:none; background:var(--accent); color:#fff; border-radius:12px; padding:0 .15em; }
 .beeldopties{ display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:.8em; max-width:560px; margin:.6em auto; }
-.beeldtegel{ font-size:3.8rem; line-height:1; background:var(--paneel); border:4px solid #0002; border-radius:22px; padding:.45em 0; cursor:pointer; box-shadow:0 5px 0 var(--schaduw); transition:transform .08s; min-height:104px; display:flex; align-items:center; justify-content:center; }
+.beeldtegel{ font-size:3.8rem; line-height:1; background:var(--paneel); border:4px solid #0002; border-radius:22px; padding:.55em .4em; cursor:pointer; box-shadow:0 5px 0 var(--schaduw); transition:transform .08s; min-height:104px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.2em; }
 .beeldtegel img{ width:80px; height:80px; object-fit:contain; }
 .beeldtegel:hover{ border-color:var(--accent); }
 .beeldtegel:active{ transform:translateY(3px); box-shadow:0 2px 0 var(--schaduw); }
@@ -273,6 +273,9 @@ button::before, .knop::before, .spelknop::before{
 .bwwezen{ font-size:19px; filter:drop-shadow(0 3px 2px rgba(0,0,0,.25)); animation:bwbob 1.3s ease-in-out infinite; }
 .bwwezen .wimg{ width:22px; height:22px; object-fit:contain; display:block; }
 .bwspark{ font-size:16px; transition:none; }
+.isoblok.iso-water{ animation:waterGlinster 2.4s ease-in-out infinite; }
+@keyframes waterGlinster{ 0%,100%{ filter:brightness(1); } 50%{ filter:brightness(1.22) saturate(1.25); } }
+@media (prefers-reduced-motion:reduce){ .isoblok.iso-water{ animation:none; } }
 @keyframes bwbob{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-3px); } }
 /* het bestuurbare poppetje: eigen naam erboven + eigen wip, zodat het opvalt tussen de rest */
 .bwpop{ font-size:23px; text-align:center; z-index:1000; }
@@ -320,6 +323,17 @@ button::before, .knop::before, .spelknop::before{
 .leestekst p{ font-size:1.18rem; line-height:1.75; margin:.3em 0 .6em; }
 .antwoorden.lezenantw{ grid-template-columns:1fr; max-width:460px; }
 .antwoorden.lezenantw button{ font-size:1.1rem; text-align:center; }
+/* hamburgermenu + spelregels */
+#hud .hudmenu{ font-size:1.3rem; }
+.menugrid{ display:grid; grid-template-columns:1fr 1fr; gap:.5em; margin:.5em 0; }
+.menugrid button{ width:100%; text-align:left; font-size:1rem; }
+.leesregels{ font-size:1.15rem; line-height:1.75; }
+/* oudersectie: schermloze tips & spelletjes */
+.tipslijst{ margin:.3em 0 0; padding-left:1.2em; }
+.tipslijst li{ margin:.25em 0; }
+.tipspel{ padding:.4em 0; border-bottom:1px solid #0001; }
+.tipspel:last-child{ border-bottom:none; }
+.tipspel > div{ margin-top:.15em; }
 </style>
 </head>
 <body data-theme="craft">
@@ -329,17 +343,9 @@ button::before, .knop::before, .spelknop::before{
   <div class="xpbalk"><i id="hudXp"></i></div>
   <span class="chip valuta"><span id="hudValutaIco">💎</span> <span id="hudValuta">0</span></span>
   <span class="chip combo" id="hudCombo" title="Reeks goede antwoorden" hidden>🔥 <span id="hudComboN">0</span></span>
-  <span class="chip" title="Oefendagen">🗓️ <span id="hudDagen">0</span></span>
-  <span class="chip" title="Speeltijd over">⏳ <span id="hudTijd">–</span></span>
-  <button onclick="openThemakeuze()" title="Thema">🎨</button>
-  <button onclick="openStemkiezer()" title="Stem">🗣️</button>
-  <button onclick="wisselGeluid()" title="Geluid" id="knopGeluid">🔔</button>
-  <button onclick="wisselMuziek()" title="Muziek" id="knopMuziek">🎵</button>
-  <button onclick="openPremium()" title="Premium" id="knopPremium">⭐</button>
-  <button onclick="installeerApp()" title="App installeren" id="knopInstall" hidden>📲</button>
-  <button onclick="openStickerboek()" title="Stickerboek">🏅</button>
-  <button onclick="openOuders()" title="Ouders (voortgang)">👪</button>
-  <button onclick="kiesProfielScherm()" title="Kies kind / profiel">👤</button>
+  <span class="chip" title="Oefendagen"><img src="ui/hud-dagen.png" style="width:20px;height:20px;object-fit:contain;vertical-align:middle"> <span id="hudDagen">0</span></span>
+  <span class="chip" title="Speeltijd over"><img src="ui/hud-tijd.png" style="width:20px;height:20px;object-fit:contain;vertical-align:middle"> <span id="hudTijd">–</span></span>
+  <button onclick="openMenu()" title="Menu" class="hudmenu">☰</button>
 </div>
 
 <main>
@@ -362,7 +368,7 @@ button::before, .knop::before, .spelknop::before{
 
   <!-- Generiek spelscherm (inhoud wordt per spel gevuld) -->
   <section class="scherm" id="scherm-spel">
-    <div class="rij"><button onclick="naarStart()">⬅️ Terug</button><h2 id="spelTitel" style="margin:0"></h2></div>
+    <div class="rij"><button onclick="naarStart()"><img src="ui/mi-terug.png" style="width:22px;height:22px;object-fit:contain;vertical-align:middle;margin-right:.3em">Terug</button><h2 id="spelTitel" style="margin:0;flex:1"></h2><button onclick="toonSpelregels()" title="Spelregels"><img src="ui/mi-info.png" style="width:24px;height:24px;object-fit:contain;vertical-align:middle"></button><button onclick="toonSpelHint()" title="Hint"><img src="ui/mi-hint.png" style="width:24px;height:24px;object-fit:contain;vertical-align:middle"></button></div>
     <div id="spelInhoud"></div>
   </section>
 </main>
@@ -387,6 +393,7 @@ button::before, .knop::before, .spelknop::before{
 <script src="data/missies.js"></script>
 <script src="data/stickers.js"></script>
 <script src="data/lezen.js"></script>
+<script src="data/oudertips.js"></script>
 <script src="data/beeldlab.js"></script>
 <script src="data/creatief.js"></script>
 
@@ -394,7 +401,7 @@ button::before, .knop::before, .spelknop::before{
 /* =========================================================================
    BLOKWERELD — hoofdscript. Logica strikt gescheiden van vormgeving.
    ========================================================================= */
-var APP_VERSIE = "3.19.0";
+var APP_VERSIE = "3.32.0";
 
 /* ---- Thema's: nieuwe skin = alleen dit object + de CSS-blokken hierboven ---- */
 var THEMAS = {
@@ -424,7 +431,7 @@ function nieuweState(){
     versie:APP_VERSIE, naam:"", leeftijd:0, groep:3, niveau:1,
     thema:"craft", stem:null, taal:"en", geluidAan:true, muziekAan:false,
     valuta:0, xp:0, oefendagen:0, ouderPin:"", besteCombo:0, bouwenVrij:false, avatar:"",
-    tel:{verdiend:0, geoogst:0, gebouwd:0, dagquest:0, levelups:0, minigame:0}, missieIndex:0, stickers:[],
+    tel:{verdiend:0, geoogst:0, gebouwd:0, dagquest:0, levelups:0, minigame:0}, missieIndex:0, stickers:[], oogstDag:null, hakDag:null,
     speeltijdMin:20, tijdGebruiktSec:0, tijdDatum:"",
     dagquest:{datum:"", reken:0, woord:0, flits:0, klaar:false},
     levels:{},            // levels["reken_1"] = {level, teller}
@@ -500,7 +507,7 @@ function verwijderKind(idx){
   PROFIELDATA.profielen[PROFIELDATA.actief]=S;
   bewaarState(); pasThemaToe(); updateHud(); kiesProfielScherm();
 }
-function kindAvatar(p){ if(p&&p.avatar) return p.avatar; var m=(typeof MASCOTTES!=="undefined"&&MASCOTTES[p.thema])||null; return m?(m.afbeelding?'<img src="'+m.afbeelding+'" alt="">':m.emoji):"🙂"; }
+function kindAvatar(p){ if(p&&p.avatar) return p.avatar; var m=(typeof MASCOTTES!=="undefined"&&MASCOTTES[p.thema])||null; if(!m) return "🙂"; if(!m.afbeelding) return m.emoji; var pad=m.afbeelding, i=pad.lastIndexOf('.'), t=(p&&(p.niveau||(typeof groepNaarNiveau==="function"&&groepNaarNiveau(p.groep||3))))||2, src=(i<0?pad:pad.slice(0,i)+'-t'+t+pad.slice(i)); return '<img src="'+src+'" data-base="'+pad+'" alt="" onerror="beeldVal(this)">'; }
 function kiesProfielScherm(){
   var kaarten = PROFIELDATA.profielen.map(function(p,i){
     var actief = i===PROFIELDATA.actief;
@@ -513,13 +520,35 @@ function kiesProfielScherm(){
       + (PROFIELDATA.profielen.length>1?'<button class="mini" title="Verwijderen" onclick="verwijderKind('+i+')">🗑️</button>':'')
       + '</div></div>';
   }).join("");
-  var html = '<h2>👦👧 Wie gaat er spelen?</h2>'
+  var html = '<h2><img src="ui/mi-kinderen.png" style="width:34px;height:34px;object-fit:contain;vertical-align:middle;margin-right:.35em">Wie gaat er spelen?</h2>'
     + '<p class="klein">Meerdere kinderen kunnen dit toestel delen — elk met een eigen profiel en eigen voortgang. Helemaal gratis.</p>'
     + '<div class="kindgrid">'+kaarten
     + '<div class="kindkaart nieuw" onclick="nieuwKind()"><div class="kindav">＋</div><div class="kindnaam">Nieuw kind</div></div>'
     + '</div>';
   openOverlay(html);
 }
+/* ---- Hamburgermenu: alle instellingen/acties gebundeld achter één ☰ ---- */
+function kanInstalleren(){ try{ return !!_installPrompt || isIOS(); }catch(e){ return false; } }
+function openMenu(){
+  var ic=function(p){return '<img src="ui/'+p+'" style="width:26px;height:26px;object-fit:contain;vertical-align:middle;margin-right:.45em">';};
+  var geluid = S.geluidAan ? ic('mi-geluid-aan.png')+"Geluid aan" : ic('mi-geluid-uit.png')+"Geluid uit";
+  var muziek = S.muziekAan ? ic('mi-muziek-aan.png')+"Muziek aan" : ic('mi-muziek-uit.png')+"Muziek uit";
+  var html = '<h2>☰ Menu</h2><div class="menugrid">'
+    + '<button onclick="kiesProfielScherm()">'+ic('mi-wissel.png')+'Wissel kind</button>'
+    + '<button onclick="openThemakeuze()">'+ic('mi-thema.png')+'Thema kiezen</button>'
+    + '<button onclick="openStickerboek()">'+ic('mi-sticker.png')+'Stickerboek</button>'
+    + '<button onclick="menuToggleGeluid()">'+geluid+'</button>'
+    + '<button onclick="menuToggleMuziek()">'+muziek+'</button>'
+    + '<button onclick="openStemkiezer()">'+ic('mi-stem.png')+'Voorleesstem</button>'
+    + '<button onclick="openOuders()">'+ic('mi-ouders.png')+'Ouders</button>'
+    + '<button onclick="openPremium()">'+ic('mi-premium.png')+'Premium</button>'
+    + (kanInstalleren() ? '<button onclick="installeerApp()">'+ic('mi-install.png')+'App installeren</button>' : '')
+    + '</div>';
+  openOverlay(html);
+}
+function menuToggleGeluid(){ wisselGeluid(); openMenu(); }
+function menuToggleMuziek(){ wisselMuziek(); openMenu(); }
+
 function resetAlles(){
   if(typeof confirm==="function" && !confirm("Weet je het zeker? ALLE kinderen en voortgang worden gewist.")) return;
   try{ localStorage.removeItem(OPSLAG_KEY); }catch(e){}
@@ -739,6 +768,20 @@ if(typeof window!=="undefined" && window.addEventListener){
 /* ---- Leeftijd → groep → niveau ---- */
 function leeftijdNaarGroep(l){ if(l<=6)return 3; if(l===7)return 4; if(l===8)return 5; if(l===9)return 6; return 7; }
 function groepNaarNiveau(g){ if(g<=3)return 1; if(g<=5)return 2; return 3; }
+/* ---- Leeftijd-varianten van beelden: kies -t1/-t2/-t3 op basis van niveau ---- */
+function beeldTier(pad){ if(!pad || pad.indexOf("data:")===0) return pad; var i=pad.lastIndexOf("."); if(i<0) return pad; var t=(typeof S!=="undefined"&&S.niveau)||2; return pad.slice(0,i)+"-t"+t+pad.slice(i); }
+function beeldVal(img){ img.onerror=null; var b=img.getAttribute("data-base"); if(b && img.getAttribute("src")!==b){ img.src=b; } else { img.style.display="none"; } }
+function beeldTag(pad, alt, cls, style){ return '<img '+(cls?'class="'+cls+'" ':'')+'src="'+beeldTier(pad)+'" data-base="'+pad+'" alt="'+(alt||"")+'"'+(style?' style="'+style+'"':'')+' onerror="beeldVal(this)">'; }
+/* emoji → eigen figuur-afbeelding (ook voor eerder gekochte maatjes in opgeslagen data) */
+var EMOJIBEELD={"🐔":"kip","🐑":"schaap","🐷":"varken","🐴":"paard","🐤":"kuiken","🐕":"hond","🐶":"hond","🧒":"kind","🧑":"persoon","🧑‍🌾":"boer","🦀":"krab","🦆":"eend","🏄":"surfer","🐇":"konijn","🐰":"konijn","🐿️":"eekhoorn","🐈":"kat","🐱":"kat","🐁":"muis","🐭":"muis","🐮":"koe","⛄":"sneeuwpop","🤖":"robot"};
+function wezenAfb(z){ if(z&&z.afb) return z.afb; var n=z&&EMOJIBEELD[z.s]; return n?("tegels/tegel-"+n+".png"):""; }
+/* thema → mascotte-afbeelding + valuta-icoon (voor de themakiezer) */
+var THEMAMASCOTTE={craft:"bram",galaxy:"kosmo",powerup:"turbo",unicorn:"fee",voetbal:"leo",zeemeermin:"merel"};
+var VALUTABEELD={craft:"ui/val-diamant.png",galaxy:"ui/val-ster.png",powerup:"ui/val-munt.png",unicorn:"ui/val-hart.png",voetbal:"ui/val-bal.png",zeemeermin:"ui/val-schelp.png"};
+/* avatar-emoji → eigen afbeelding (Kies je poppetje + speler in de wereld) */
+var AVATARBEELD={"🧒":"tegels/tegel-kind.png","👦":"tegels/tegel-jongen.png","👧":"tegels/tegel-meisje.png","🧑":"tegels/tegel-persoon.png","🦸":"ui/av-superheld.png","🦹":"ui/av-schurk.png","🧙":"ui/av-tovenaar.png","🧚":"ui/av-fee.png","🦄":"tegels/tegel-eenhoorn.png","🐱":"tegels/tegel-kat.png","🐶":"tegels/tegel-hond.png","🐰":"tegels/tegel-konijn.png","🦊":"tegels/tegel-vos.png","🐸":"tegels/tegel-kikker.png","🤖":"tegels/tegel-robot.png","🦖":"tegels/tegel-dinosaurus.png","🐼":"ui/av-panda.png","🐨":"ui/av-koala.png","🐯":"tegels/tegel-tijger.png","👽":"ui/av-alien.png"};
+function avatarBeeld(a){ return AVATARBEELD[a]||""; }
+function avatarHtml(a,sz){ var p=AVATARBEELD[a]; sz=sz||40; return p?'<img src="'+p+'" style="width:'+sz+'px;height:'+sz+'px;object-fit:contain">':a; }
 function stelLeeftijdIn(l){
   S.leeftijd = l; S.groep = leeftijdNaarGroep(l); S.niveau = groepNaarNiveau(S.groep);
   if(!S.speeltijdMin || S.speeltijdMin===20){ S.speeltijdMin = l<=6?15:(l<=8?20:30); }
@@ -763,7 +806,7 @@ function updateHud(){
   g.hidden = !S.naam;
   var set=function(id,v){ var e=document.getElementById(id); if(e) e.textContent=v; };
   set("hudNaam", S.naam||"—"); set("hudValuta", S.valuta); set("hudDagen", S.oefendagen);
-  set("hudValutaIco", THEMA.valuta);
+  var hvi=document.getElementById("hudValutaIco"); if(hvi){ var vb=VALUTABEELD[S.thema]; hvi.innerHTML = vb ? '<img src="'+vb+'" style="width:20px;height:20px;object-fit:contain;vertical-align:middle">' : THEMA.valuta; }
   var xp = document.getElementById("hudXp"); if(xp) xp.style.width = (S.xp%100)+"%";
   var tijd = document.getElementById("hudTijd");
   if(tijd){ if(S.speeltijdMin>=999){ tijd.textContent="∞"; } else { var over=Math.max(0,S.speeltijdMin - Math.floor(S.tijdGebruiktSec/60)); tijd.textContent=over+"m"; } }
@@ -922,8 +965,47 @@ function openSpel(sleutel){
   };
   var titels = Object.assign({engels:"Engelse Expeditie 🇬🇧", spaans:"Spaanse Expeditie 🇪🇸", beeldlab:"Puzzellab 🧩", lezen:"Leesavontuur 📚"}, THEMA.spellen);
   if(titelEl) titelEl.textContent = titels[sleutel]||"";
+  _huidigSpel = sleutel;
   var fn = starters[sleutel];
   if(typeof fn==="function"){ try{ fn(); }catch(e){ toonFout("Spel starten mislukt: "+e.message); } }
+}
+/* ---- Spelregels + betekenisvolle hints per spel (kort, voorleesbaar) ---- */
+var _huidigSpel = "reken";
+var SPELREGELS = {
+  reken:"Los de som op en tik het goede antwoord. Snel goed? Dan verdien je extra. Twijfel je? Gebruik de hint met blokjes.",
+  spelling:"Luister naar het woord en bouw het na met de juiste klankdelen. Elk stukje is een klank van het woord.",
+  verhaal:"Lees of luister het verhaaltje en reken uit wat er gevraagd wordt. Soms hoort er een klok bij.",
+  flits:"Het woord verschijnt heel kort. Onthoud het en kies daarna het juiste woord.",
+  memory:"Draai twee kaarten om en zoek de plaatjes die bij elkaar horen.",
+  engels:"Bekijk het plaatje en kies het juiste Engelse woord. Tik op de luidspreker om het te horen.",
+  spaans:"Bekijk het plaatje en kies het juiste Spaanse woord. Tik op de luidspreker om het te horen.",
+  denken:"Kijk goed naar de plaatjes en kies er eentje. Denk na over wat er anders is of wat erbij hoort.",
+  beeldlab:"Kies een doe-puzzel: op volgorde leggen, nabouwen, onthouden of zoeken.",
+  lezen:"Het verhaal wordt voorgelezen. Luister goed en beantwoord daarna de vragen. Je mag zo vaak luisteren als je wilt.",
+  bouw:"Loop met de pijltjes. Kies een blok en bouw je eigen wereld. Verdien diamanten met oefenen om meer te bouwen. Op akkers groeit eten dat je kunt oogsten."
+};
+var HINTS = {
+  reken:"Tel rustig verder vanaf het grootste getal, of gebruik de blokjes-hint om te zien hoeveel het is.",
+  spelling:"Zeg het woord langzaam en hak het in stukjes: welke klanken hoor je los? Bouw die op volgorde.",
+  verhaal:"Zoek in het verhaaltje de getallen: komt er iets bij (plus) of gaat er iets af (min)?",
+  flits:"Let op de vorm van het woord: het begin en het einde. Lange en korte woorden zien er anders uit.",
+  memory:"Onthoud waar een plaatje lag; draai dezelfde plek terug als je de partner zoekt.",
+  engels:"Denk aan hoe het woord klinkt; soms lijkt het een beetje op het Nederlandse woord.",
+  spaans:"Denk aan hoe het woord klinkt; soms lijkt het een beetje op het Nederlandse woord.",
+  denken:"Vergelijk de plaatjes: wat hebben ze gemeen, en welke past niet in het rijtje?",
+  beeldlab:"Kijk eerst rustig naar het voorbeeld voordat je begint.",
+  lezen:"Weet je het niet zeker? Luister het verhaal nog een keer en let op wie, wat en waar.",
+  bouw:"Verdien eerst diamanten met de oefenspellen; daarmee koop en bouw je meer. Loop over rijp gewas om te oogsten."
+};
+function toonSpelregels(){
+  var t = SPELREGELS[_huidigSpel] || "Kies een spel en volg de aanwijzingen. Alles kan worden voorgelezen.";
+  openOverlay('<h2>ℹ️ Hoe werkt het?</h2><p class="leesregels">'+t+'</p><button onclick="zeg(SPELREGELS[_huidigSpel]||\'\')">🔊 Lees voor</button>');
+  zeg(t);
+}
+function toonSpelHint(){
+  var t = HINTS[_huidigSpel] || "Kijk rustig, je kunt het! Gebruik de knoppen om iets te laten voorlezen.";
+  openOverlay('<h2>💡 Hint</h2><p class="leesregels">'+t+'</p><button onclick="zeg(HINTS[_huidigSpel]||\'\')">🔊 Lees voor</button>');
+  zeg(t);
 }
 
 /* ---- Startscherm opbouwen ---- */
@@ -932,34 +1014,35 @@ function bouwStartscherm(){
   if(!oefen||!maak) return;
   var sp = THEMA.spellen;
   var lijst = [
-    {k:"reken", ico:"⛏️", naam:sp.reken},
-    {k:"spelling", ico:"🔨", naam:sp.spelling},
-    {k:"lezen", ico:"📚", naam:"Leesavontuur"},
-    {k:"verhaal", ico:"📖", naam:sp.verhaal, groep:4},
-    {k:"flits", ico:"⚡", naam:sp.flits},
-    {k:"memory", ico:"🃏", naam:sp.memory},
-    {k:"engels", ico:"🇬🇧", naam:"Engelse Expeditie"},
-    {k:"spaans", ico:"🇪🇸", naam:"Spaanse Expeditie"},
-    {k:"denken", ico:"🧠", naam:sp.denken},
-    {k:"beeldlab", ico:"🧩", naam:"Puzzellab"}
+    {k:"reken", ico:"⛏️", img:"ui/menu-reken.png", naam:sp.reken},
+    {k:"spelling", ico:"🔨", img:"ui/menu-spelling.png", naam:sp.spelling},
+    {k:"lezen", ico:"📚", img:"ui/menu-lezen.png", naam:"Leesavontuur"},
+    {k:"verhaal", ico:"📖", img:"ui/menu-verhaal.png", naam:sp.verhaal, groep:4},
+    {k:"flits", ico:"⚡", img:"ui/menu-flits.png", naam:sp.flits},
+    {k:"memory", ico:"🃏", img:"ui/menu-memory.png", naam:sp.memory},
+    {k:"engels", ico:"🇬🇧", img:"ui/menu-engels.png", naam:"Engelse Expeditie"},
+    {k:"spaans", ico:"🇪🇸", img:"ui/menu-spaans.png", naam:"Spaanse Expeditie"},
+    {k:"denken", ico:"🧠", img:"ui/menu-denken.png", naam:sp.denken},
+    {k:"beeldlab", ico:"🧩", img:"ui/menu-beeldlab.png", naam:"Puzzellab"}
   ];
   oefen.innerHTML="";
   lijst.forEach(function(item){
     if(item.groep && S.groep < item.groep) return; // verhaaltjessommen pas vanaf groep 4
     var d = document.createElement("div");
     d.className="spelknop"; d.setAttribute("onclick","openSpel('"+item.k+"')");
-    d.innerHTML='<span class="ico">'+item.ico+'</span><span>'+item.naam+'</span>';
+    var ic = item.img ? '<img src="'+item.img+'" style="width:44px;height:44px;object-fit:contain">' : item.ico;
+    d.innerHTML='<span class="ico">'+ic+'</span><span>'+item.naam+'</span>';
     oefen.appendChild(d);
   });
   maak.innerHTML="";
   var b = document.createElement("div");
   if(bouwenIsVrij()){
     b.className="spelknop"; b.setAttribute("onclick","openSpel('bouw')");
-    b.innerHTML='<span class="ico">🧱</span><span>'+sp.bouw+'</span>';
+    b.innerHTML='<span class="ico"><img src="ui/menu-bouw.png" style="width:44px;height:44px;object-fit:contain"></span><span>'+sp.bouw+'</span>';
   } else {
     var nog = Math.max(0, DREMPEL_BOUWEN - S.valuta);
     b.className="spelknop opslot"; b.setAttribute("onclick","bouwGeblokkeerdMelding()");
-    b.innerHTML='<span class="ico">🔒</span><span>'+sp.bouw+'</span><b class="slotinfo">Nog '+nog+' te gaan</b>';
+    b.innerHTML='<span class="ico"><img src="ui/menu-slot.png" style="width:44px;height:44px;object-fit:contain"></span><span>'+sp.bouw+'</span><b class="slotinfo">Nog '+nog+' te gaan</b>';
   }
   maak.appendChild(b);
   tekenMissie();
@@ -984,7 +1067,7 @@ function tekenMascotte(){
   var vak = document.getElementById("mascotteVak"); if(!vak) return;
   var m = mascotteVanThema();
   var fig = m.afbeelding
-    ? '<img class="fig" src="'+m.afbeelding+'" alt="'+m.naam+'" onerror="this.style.display=\'none\'">'
+    ? beeldTag(m.afbeelding, m.naam, "fig")
     : '<span class="fig">'+m.emoji+'</span>';
   vak.innerHTML = fig
     + '<span class="bubbel"><b>'+m.naam+':</b> <span id="mascotteZin">'+mascotteZin()+'</span></span>';
@@ -1058,7 +1141,7 @@ function spelerAvatar(){ return S.avatar || (THEMA.poppetje==="pixel" ? "🧍" :
 function kiesAvatar(a){ S.avatar=a; bewaarState(); var g=document.getElementById("pfAvatar"); if(g){ [].forEach.call(g.children,function(c){ c.style.outline = c.getAttribute("data-av")===a ? "3px solid var(--accent)" : ""; }); } updateHud(); }
 function tekenAvatarKeuze(){
   var g=document.getElementById("pfAvatar"); if(!g) return; g.innerHTML="";
-  AVATARS.forEach(function(a){ var b=document.createElement("button"); b.textContent=a; b.setAttribute("data-av",a);
+  AVATARS.forEach(function(a){ var b=document.createElement("button"); b.innerHTML=avatarHtml(a,42); b.setAttribute("data-av",a);
     b.style.fontSize="1.5rem"; if(a===S.avatar) b.style.outline="3px solid var(--accent)";
     b.onclick=function(){ kiesAvatar(a); }; g.appendChild(b); });
 }
@@ -1070,7 +1153,7 @@ function openProfiel(eerste){
    + '<p><b>Hoe lang spelen vandaag?</b></p><div class="rij" id="pfTijd"></div>'
    + '<p><b>Ouder-PIN (optioneel, 4 cijfers):</b></p>'
    + '<input id="pfPin" inputmode="numeric" maxlength="4" style="font-size:1.2rem;padding:.5em;border-radius:10px;border:2px solid #ccc;width:120px" value="'+(S.ouderPin||"")+'">'
-   + '<p><button class="groot" onclick="bewaarProfiel()">Spelen! 🎮</button></p>';
+   + '<p><button class="groot" onclick="bewaarProfiel()">Spelen! <img src="ui/mi-play.png" style="width:22px;height:22px;object-fit:contain;vertical-align:middle"></button></p>';
   openOverlay(html);
   // sluitknop verbergen bij allereerste profiel
   var sl = document.querySelector("#overlay .sluit"); if(sl) sl.style.display = eerste && !S.naam ? "none":"block";
@@ -1103,24 +1186,24 @@ var _ob = { stap:0 };
 function startOnboarding(){ _ob={stap:0}; obStap(0); }
 function obNav(stap, label, actie){
   var dots=""; for(var i=0;i<3;i++) dots+='<span class="obdot'+(i===stap?" aan":"")+'"></span>';
-  var terug = stap>0 ? '<button onclick="obStap('+(stap-1)+')">⬅️ Terug</button>' : '';
+  var terug = stap>0 ? '<button onclick="obStap('+(stap-1)+')"><img src="ui/mi-terug.png" style="width:20px;height:20px;object-fit:contain;vertical-align:middle;margin-right:.3em">Terug</button>' : '';
   return '<div class="obdots">'+dots+'</div><div class="rij" style="justify-content:center">'+terug+'<button class="groot" onclick="'+actie+'">'+label+'</button></div>';
 }
 function obStap(n){
   _ob.stap=n; var html;
   if(n===0){
-    html='<div class="onbo"><div class="obfig">👋</div><h2>Hoi! Wie ben jij?</h2>'
+    html='<div class="onbo"><div class="obfig"><img src="tegels/tegel-hand.png" style="width:64px;height:64px;object-fit:contain"></div><h2>Hoi! Wie ben jij?</h2>'
       +'<p class="klein">Typ je naam.</p>'
       +'<input id="pfNaam" style="font-size:1.3rem;padding:.55em;border-radius:12px;border:2px solid #ccc;width:100%;text-align:center" value="'+(S.naam||"")+'" placeholder="Je naam">'
-      +obNav(0,"Volgende ➡️","obNaarLeeftijd()")+'</div>';
+      +obNav(0,"Volgende","obNaarLeeftijd()")+'</div>';
   } else if(n===1){
-    html='<div class="onbo"><div class="obfig">🎂</div><h2>Hoe oud ben je?</h2>'
+    html='<div class="onbo"><div class="obfig"><img src="tegels/tegel-taart.png" style="width:64px;height:64px;object-fit:contain"></div><h2>Hoe oud ben je?</h2>'
       +'<div class="rij" id="obLeeftijd" style="justify-content:center;flex-wrap:wrap"></div>'
-      +obNav(1,"Volgende ➡️","obNaarAvatar()")+'</div>';
+      +obNav(1,"Volgende","obNaarAvatar()")+'</div>';
   } else {
-    html='<div class="onbo"><div class="obfig">🎨</div><h2>Kies je poppetje!</h2>'
+    html='<div class="onbo"><div class="obfig"><img src="ui/mi-thema.png" style="width:64px;height:64px;object-fit:contain"></div><h2>Kies je poppetje!</h2>'
       +'<div class="rij" id="obAvatar" style="justify-content:center;flex-wrap:wrap"></div>'
-      +obNav(2,"Spelen! 🎮","obKlaar()")+'</div>';
+      +obNav(2,'Spelen! <img src="ui/mi-play.png" style="width:22px;height:22px;object-fit:contain;vertical-align:middle">',"obKlaar()")+'</div>';
   }
   openOverlay(html);
   var sl=document.querySelector("#overlay .sluit"); if(sl) sl.style.display="none";   // niet weg te klikken
@@ -1146,7 +1229,7 @@ function obNaarAvatar(){
 }
 function obTekenAvatar(){
   var g=document.getElementById("obAvatar"); if(!g) return; g.innerHTML="";
-  AVATARS.forEach(function(a){ var b=document.createElement("button"); b.textContent=a; b.style.fontSize="1.6rem";
+  AVATARS.forEach(function(a){ var b=document.createElement("button"); b.innerHTML=avatarHtml(a,44); b.style.fontSize="1.6rem";
     if(a===S.avatar) b.style.outline="3px solid var(--accent)";
     b.onclick=function(){ S.avatar=a; bewaarState(); [].forEach.call(g.children,function(c){c.style.outline="";}); b.style.outline="3px solid var(--accent)"; };
     g.appendChild(b); });
@@ -1163,9 +1246,11 @@ function obKlaar(){
 function openThemakeuze(){
   var html='<h2>Kies je wereld</h2><div class="grid">';
   Object.keys(THEMAS).forEach(function(k){ var t=THEMAS[k];
+    var masc = THEMAMASCOTTE[k] ? '<img src="mascottes/mascotte-'+THEMAMASCOTTE[k]+'.png" style="width:58px;height:58px;object-fit:contain">' : (t.poppetje==="pixel"?"🧍":t.poppetje);
+    var valb = VALUTABEELD[k] ? '<img src="'+VALUTABEELD[k]+'" style="width:20px;height:20px;object-fit:contain;vertical-align:middle"> ' : (t.valuta+' ');
     html += '<div class="spelknop" style="background:var(--paneel);color:var(--paneeltekst);border:3px solid '+(k===S.thema?'var(--accent)':'#0002')+'" onclick="kiesThema(\''+k+'\')">'
-      + '<span class="ico">'+(t.poppetje==="pixel"?"🧍":t.poppetje)+'</span><b>'+t.naam+'</b>'
-      + '<span>'+t.valuta+' '+t.valutaNaam+'</span></div>';
+      + '<span class="ico">'+masc+'</span><b>'+t.naam+'</b>'
+      + '<span>'+valb+t.valutaNaam+'</span></div>';
   });
   html+='</div>';
   openOverlay(html);
@@ -1246,6 +1331,9 @@ function ouderVoortgangHtml(){
 }
 function openOuders(){
   if(!vraagOuderPin()) return;
+  ouderScherm();
+}
+function ouderScherm(){
   var somGeoefend = Object.keys(S.somStats||{}).length;
   var speeltijd = S.speeltijdMin>=999 ? "onbeperkt" : (S.speeltijdMin+" min/dag");
   var kinderen = '';
@@ -1265,6 +1353,7 @@ function openOuders(){
       + '<div class="statkaart"><div class="statnum">'+S.valuta+'</div><div class="klein">'+(THEMA.valutaNaam||"munten")+'</div></div>'
       + '<div class="statkaart"><div class="statnum">'+S.xp+'</div><div class="klein">XP</div></div>'
     + '</div>'
+    + '<div class="sectie" style="background:linear-gradient(160deg,#eaf5e2,#d7ecc8);border:2px solid var(--accent2)"><b>🎲 Zonder scherm oefenen</b><br><span class="klein">Tips &amp; spelletjes om samen te spelen zonder telefoon of tablet.</span><br><button class="knop" style="margin-top:.5em" onclick="openOuderTips()">Bekijk tips &amp; spelletjes →</button></div>'
     + '<h3>Voortgang per onderdeel</h3>' + ouderVoortgangHtml()
     + (somGeoefend? '<p class="klein">Rekensommen geoefend: '+somGeoefend+' · <a href="#" onclick="toonMuur();return false">Mijn muur bekijken 🧱</a></p>' : '')
     + '<h3>Instellingen</h3>'
@@ -1272,6 +1361,24 @@ function openOuders(){
     + '<div class="rij"><button onclick="openProfiel()">✏️ Profiel &amp; PIN</button>'
     + '<button onclick="ouderVerleng()">⏳ +10 min vandaag</button></div>'
     + '<a class="reset" style="color:#c0392b" href="#" onclick="resetAlles();return false">Alle gegevens wissen (reset)</a>';
+  openOverlay(html);
+}
+/* Uitgebreide oudersectie: tips & spelletjes zónder scherm (data/oudertips.js). */
+function openOuderTips(){
+  var t = (typeof OUDERTIPS!=="undefined") ? OUDERTIPS : {intro:"",algemeen:[],categorieen:[]};
+  var html = '<h2>🎲 Zonder scherm spelen</h2><p class="klein">'+(t.intro||"")+'</p>';
+  if(t.algemeen && t.algemeen.length){
+    html += '<div class="sectie"><b>💡 Tips voor thuis</b><ul class="tipslijst">'
+      + t.algemeen.map(function(x){ return '<li>'+x+'</li>'; }).join('') + '</ul></div>';
+  }
+  (t.categorieen||[]).forEach(function(c){
+    html += '<div class="sectie"><h3 style="margin:.1em 0 .4em">'+c.titel+'</h3>';
+    (c.spellen||[]).forEach(function(s){
+      html += '<div class="tipspel"><b>'+s.naam+'</b> <span class="klein">('+s.nodig+')</span><div>'+s.hoe+'</div></div>';
+    });
+    html += '</div>';
+  });
+  html += '<div class="rij"><button onclick="ouderScherm()"><img src="ui/mi-terug.png" style="width:20px;height:20px;object-fit:contain;vertical-align:middle;margin-right:.3em">Terug naar ouders</button></div>';
   openOverlay(html);
 }
 
@@ -1663,7 +1770,7 @@ function memTeken(){
   inh.innerHTML=html; var g=document.getElementById("memGrid");
   _mem.kaarten.forEach(function(kaart,i){ var d=document.createElement("div"); d.className="spelknop";
     var zichtbaar = kaart.gevonden || _mem.open.indexOf(i)>=0;
-    var voor = !zichtbaar ? "❔" : (kaart.type==="plaatje" && kaart.afb ? '<img src="'+kaart.afb+'" alt="'+kaart.woord+'" style="width:64px;height:64px;object-fit:contain">' : kaart.inhoud);
+    var voor = !zichtbaar ? "❔" : (kaart.type==="plaatje" && kaart.afb ? beeldTag(kaart.afb, kaart.woord, null, "width:64px;height:64px;object-fit:contain") : kaart.inhoud);
     d.innerHTML='<span class="ico">'+voor+'</span>';
     if(kaart.gevonden) d.style.opacity="0.6";
     d.onclick=function(){ memKlik(i); }; g&&g.appendChild(d); });
@@ -1696,7 +1803,7 @@ function tlTeken(){
   var inh=document.getElementById("spelInhoud"); if(!inh)return; var it=_tl.item;
   var vlag=_tl.taal==="en"?"🇬🇧":"🇪🇸";
   inh.innerHTML='<div class="midden"><div class="klein">'+levelBadge(tlSpelSleutel(),1)+'</div>'
-    +'<div style="font-size:4.6rem;line-height:1">'+(it.afb?'<img src="'+it.afb+'" alt="'+it.nl+'" style="width:120px;height:120px;object-fit:contain">':it.plaatje)+'</div><div class="steenblok">'+it.nl+' → '+vlag+'</div>'
+    +'<div style="font-size:4.6rem;line-height:1">'+(it.afb?beeldTag(it.afb, it.nl, null, "width:120px;height:120px;object-fit:contain"):it.plaatje)+'</div><div class="steenblok">'+it.nl+' → '+vlag+'</div>'
     +'<div id="tlAntw"></div><div class="feedback" id="tlFb"></div></div>';
   var an=document.getElementById("tlAntw");
   _tl.opties.forEach(function(w){ var rij=document.createElement("div"); rij.className="rij"; rij.style.justifyContent="center";
@@ -1788,10 +1895,10 @@ function startBeeldlab(){
   inh.innerHTML='<div class="midden"><div class="klein">'+levelBadge("beeldlab")+'</div>'
    +'<p class="beeldopdracht">Kies een puzzel</p>'
    +'<div class="beeldopties">'
-   +'<button class="beeldtegel" onclick="blStart(\'sorteer\')">🧮<div class="bllabel">Op volgorde</div></button>'
-   +'<button class="beeldtegel" onclick="blStart(\'nabouw\')">🧱<div class="bllabel">Na-bouwen</div></button>'
-   +'<button class="beeldtegel" onclick="blStart(\'geheugen\')">🧠<div class="bllabel">Geheugen</div></button>'
-   +'<button class="beeldtegel" onclick="blStart(\'zoek\')">🔎<div class="bllabel">Zoekplaat</div></button>'
+   +'<button class="beeldtegel" onclick="blStart(\'sorteer\')"><img src="ui/pz-sorteer.png"><div class="bllabel">Op volgorde</div></button>'
+   +'<button class="beeldtegel" onclick="blStart(\'nabouw\')"><img src="ui/menu-bouw.png"><div class="bllabel">Na-bouwen</div></button>'
+   +'<button class="beeldtegel" onclick="blStart(\'geheugen\')"><img src="ui/menu-denken.png"><div class="bllabel">Geheugen</div></button>'
+   +'<button class="beeldtegel" onclick="blStart(\'zoek\')"><img src="ui/pz-zoek.png"><div class="bllabel">Zoekplaat</div></button>'
    +'</div></div>';
 }
 function blStart(modus){
@@ -1930,25 +2037,28 @@ var BLOKKEN = {
   gras:{prijs:1,kleur:"#8ed36a"}, zand:{prijs:1,kleur:"#f0dc9a"}, straat:{prijs:1,kleur:"#b7b2ad"},
   water:{prijs:1,kleur:"#6ec3ea"}, steen:{prijs:1,kleur:"#b0aca8"}, rots:{prijs:1,kleur:"#8a7a68"},
   hout:{prijs:1,kleur:"#c08a55"}, blad:{prijs:1,kleur:"#69bd54"}, akker:{prijs:2,kleur:"#7b4a24"},
-  boom:{prijs:2,emoji:"🌳"}, goud:{prijs:3,kleur:"#ffd23f",glans:true}, schatkist:{prijs:5,emoji:"🎁"},
-  kip:{prijs:2,emoji:"🐔"}, varken:{prijs:3,emoji:"🐷"}, schaap:{prijs:3,emoji:"🐑"}, paard:{prijs:4,emoji:"🐴"},
+  boom:{prijs:2,emoji:"🌳",afbeelding:"tegels/tegel-boom.png"}, goud:{prijs:3,kleur:"#ffd23f",glans:true}, schatkist:{prijs:5,emoji:"🎁",afbeelding:"tegels/tegel-cadeau.png"},
+  kip:{prijs:2,emoji:"🐔",afbeelding:"tegels/tegel-kip.png"}, varken:{prijs:3,emoji:"🐷",afbeelding:"tegels/tegel-varken.png"}, schaap:{prijs:3,emoji:"🐑",afbeelding:"tegels/tegel-schaap.png"}, paard:{prijs:4,emoji:"🐴",afbeelding:"tegels/tegel-paard.png"},
   // extra speelse items (Toca-achtig)
-  bloem:{prijs:1,emoji:"🌷"}, struik:{prijs:1,emoji:"🌿"}, bank:{prijs:2,emoji:"🪑"}, bal:{prijs:1,emoji:"⚽"},
-  palm:{prijs:2,emoji:"🌴"}, boot:{prijs:3,emoji:"⛵"}, bed:{prijs:3,emoji:"🛏️"}, tafel:{prijs:2,emoji:"🍽️"},
-  lamp:{prijs:2,emoji:"💡"}, cadeau:{prijs:2,emoji:"🎈"}
+  bloem:{prijs:1,emoji:"🌷",afbeelding:"tegels/tegel-bloem.png"}, struik:{prijs:1,emoji:"🌿",afbeelding:"tegels/tegel-struik.png"}, bank:{prijs:2,emoji:"🪑",afbeelding:"tegels/tegel-bank.png"}, bal:{prijs:1,emoji:"⚽",afbeelding:"tegels/tegel-bal.png"},
+  palm:{prijs:2,emoji:"🌴",afbeelding:"tegels/tegel-palm.png"}, boot:{prijs:3,emoji:"⛵",afbeelding:"tegels/tegel-boot.png"}, bed:{prijs:3,emoji:"🛏️",afbeelding:"tegels/tegel-bed.png"}, tafel:{prijs:2,emoji:"🍽️",afbeelding:"tegels/tegel-tafel.png"},
+  lamp:{prijs:2,emoji:"💡",afbeelding:"tegels/tegel-lamp.png"}, cadeau:{prijs:2,emoji:"🎈",afbeelding:"tegels/tegel-ballon.png"},
+  vlag:{prijs:1,emoji:"🚩",afbeelding:"tegels/tegel-vlag.png"}, toren:{prijs:2,emoji:"🗼",afbeelding:"tegels/tegel-toren.png"}   // vlag maakt de 'bouw een toren met een vlag'-opdrachten mogelijk
 };
 /* Akkerbouw: op een akker groeit vanzelf groente/fruit dat je kunt oogsten voor een béétje extra.
    Bewust klein gehouden — de meeste diamanten verdien je met de leerspellen. GEWAS staat los van
    het bouwpalet (geen plaatsbare blokken, alleen groei-beeldjes). */
 var GEWAS = { kiem:{emoji:"🌱"}, wortel:{emoji:"🥕"}, aardbei:{emoji:"🍓"}, mais:{emoji:"🌽"}, appel:{emoji:"🍎"}, druiven:{emoji:"🍇"}, tomaat:{emoji:"🍅"} };
 var GEWAS_RIJP = ["wortel","aardbei","mais","appel","druiven","tomaat"];
-var GEWAS_KANS = 0.06;   // groeikans per beweegtik per akker (langzaam → minimale opbrengst)
-var OOGST_OPBRENGST = 1; // één diamant per geoogst gewas
+var GEWAS_KANS = 0.06;      // groeikans per beweegtik per akker (langzaam → minimale opbrengst)
+var OOGST_OPBRENGST = 1;    // één diamant per geoogst gewas
+var OOGST_MAX_PER_DAG = 10; // grens: zoveel diamanten kun je per dag uit oogsten verdienen (leren blijft de hoofdbron)
+var HAK_MAX_PER_DAG = 10;   // grens: zoveel diamanten kun je per dag terugverdienen met weghakken
 function blokDef(type){ return BLOKKEN[type] || GEWAS[type] || {kleur:"#ccc"}; }
 function bwIsRijp(type){ return !!(GEWAS[type] && type!=="kiem"); }
 var BW_MAXHOOG=6, BW_MAXVELD=30;
 var BW_TILEW=34, BW_TILEH=17, BW_LAYERH=13, BW_OY=20;   // isometrische maten (gedeeld door tegels + levende laag)
-var _bw={modus:"avontuur", blok:"steen", actief:false, keysGebonden:false, nodes:null, popNode:null, sparkleNode:null};
+var _bw={modus:"bouwen", blok:"steen", actief:false, keysGebonden:false, nodes:null, popNode:null, sparkleNode:null};
 var _bwTimer=null;
 /* Rondlopend leven per wereldtype: dieren + poppetjes die vanzelf bewegen (actie!).
    Data-gestuurd via data/wezens.js (bewerkbaar in beheer.html). Valt terug op onderstaande
@@ -1975,12 +2085,23 @@ function bwDef(type){ return ({
 })[type]; }
 function bwKoopbareTypes(){ return ["strand","park","huis"]; }
 function _leegGrid(w,h,bodem){ var g=[]; for(var y=0;y<h;y++){ var r=[]; for(var x=0;x<w;x++) r.push([bodem||"gras"]); g.push(r); } return g; }
-/* De werelden starten KAAL: alleen basisgrond. Het kind bouwt (en koopt leven) zelf,
-   met de credits die het eerst verdient. Zo is bouwen een beloning, geen startpunt. */
-function genStart(w,h){ return _leegGrid(w,h,"gras"); }
-function genStrand(w,h){ return _leegGrid(w,h,"zand"); }
-function genPark(w,h){ return _leegGrid(w,h,"gras"); }
-function genHuis(w,h){ return _leegGrid(w,h,"hout"); }
+/* De werelden starten zonder spullen (geen bomen/dieren/schatten → bouwen blijft de beloning),
+   maar krijgen wél zacht terreinreliëf van alleen grondblokken, zodat het isometrisch/3D oogt. */
+function reliefGrid(w,h,bodem){
+  bodem = bodem||"gras";
+  var g=_leegGrid(w,h,bodem);
+  var heuvels = Math.max(3, Math.floor(w*h*0.06));   // een paar zachte heuveltjes
+  for(var i=0;i<heuvels;i++){
+    var cx=1+Math.floor(Math.random()*(w-2)), cy=1+Math.floor(Math.random()*(h-2)), hoog=1+Math.floor(Math.random()*2);
+    for(var d=0;d<hoog;d++){ g[cy][cx].push(bodem); }
+    [[1,0],[-1,0],[0,1],[0,-1]].forEach(function(o){ var x=cx+o[0],y=cy+o[1]; if(g[y]&&g[y][x]&&Math.random()<0.55) g[y][x].push(bodem); });
+  }
+  return g;
+}
+function genStart(w,h){ return reliefGrid(w,h,"gras"); }
+function genStrand(w,h){ return reliefGrid(w,h,"zand"); }
+function genPark(w,h){ return reliefGrid(w,h,"gras"); }
+function genHuis(w,h){ return reliefGrid(w,h,"hout"); }
 
 /* ---- Werelden-state (met migratie van oude enkelvoudige wereld) ---- */
 function bwInitWerelden(){
@@ -2026,8 +2147,15 @@ function bwActie(){ var w=bwWereld(); if(oogst(w.pop.x,w.pop.y)) return; if(_bw.
 function oogst(x,y){
   var w=bwWereld(), cel=w.grid[y] && w.grid[y][x]; if(!cel) return false;
   if(!bwIsRijp(cel[cel.length-1])) return false;
-  cel.pop(); geefValuta(OOGST_OPBRENGST); telOp("geoogst"); speelGeluid("paar");
-  toonToast("Geoogst! +"+OOGST_OPBRENGST+" "+THEMA.valutaNaam+" 🧺");
+  cel.pop(); speelGeluid("paar"); telOp("geoogst");
+  var d=vandaagStr();
+  if(!S.oogstDag || S.oogstDag.datum!==d) S.oogstDag={datum:d, aantal:0};
+  if(S.oogstDag.aantal < OOGST_MAX_PER_DAG){
+    S.oogstDag.aantal++; geefValuta(OOGST_OPBRENGST);
+    toonToast("Geoogst! +"+OOGST_OPBRENGST+" "+THEMA.valutaNaam+" 🧺 ("+S.oogstDag.aantal+"/"+OOGST_MAX_PER_DAG+" vandaag)");
+  } else {
+    toonToast("Mooi geoogst! Vandaag geen extra "+THEMA.valutaNaam+" meer van de akker 🌙 — verdien de rest met oefenen.");
+  }
   bewaarState(); bwHertekenTiles(); return true;
 }
 function bwHertekenTiles(){ var t=document.getElementById("bwTiles"); if(t) t.innerHTML=bwTilesHtml(bwWereld()); }
@@ -2040,8 +2168,17 @@ function bwPlaats(x,y){
 function bwHak(x,y){
   var w=bwWereld(), cel=w.grid[y][x];
   if(cel.length<=1){ toonToast("De bodem blijft."); return false; }   // basislaag blijft
-  if(S.valuta<1){ creditsOpMelding(); return false; }
-  cel.pop(); geefValuta(-1); speelGeluid("hak"); bewaarState(); bwTeken(); return true;   // weghakken kost óók 1
+  var type=cel[cel.length-1]; cel.pop();                              // bovenste blok weghalen
+  var terug=Math.max(1, (BLOKKEN[type]&&BLOKKEN[type].prijs)||1);     // je krijgt de waarde terug
+  var d=vandaagStr();
+  if(!S.hakDag || S.hakDag.datum!==d) S.hakDag={datum:d, aantal:0};
+  if(S.hakDag.aantal < HAK_MAX_PER_DAG){
+    S.hakDag.aantal++; geefValuta(terug);
+    toonToast("Weggehaald! +"+terug+" "+THEMA.valutaNaam+" terug ("+S.hakDag.aantal+"/"+HAK_MAX_PER_DAG+" vandaag)");
+  } else {
+    toonToast("Weggehaald! Dag-grens voor terugverdienen bereikt 🌙");
+  }
+  speelGeluid("hak"); bewaarState(); bwTeken(); return true;
 }
 
 /* ---- Winkel: bij kunnen kopen met je valuta ---- */
@@ -2101,7 +2238,26 @@ function bwIso(wl, x, y, up){
   var sx=(x-y)*BW_TILEW/2+ox, sy=(x+y)*BW_TILEH/2 - stap*BW_LAYERH + BW_OY;
   return { x:sx, y:sy-(up||0), z:(x+y)*10+40 };
 }
-/* alleen de statische tegels (het landschap) */
+/* Eén blok als echte isometrische KUBUS: bovenkant (diamant) + twee gearceerde zijkanten → 3D. */
+function isoBlokHtml(sx, sy, def, z, x, y, type){
+  var w=BW_TILEW, ht=BW_TILEH, hv=BW_LAYERH;
+  var klik='onclick="bwTikCel('+x+','+y+')" ';
+  if(def.afbeelding){
+    return '<div '+klik+'style="cursor:pointer;position:absolute;left:'+(sx-14)+'px;top:'+(sy-18)+'px;z-index:'+z+'"><img src="'+def.afbeelding+'" style="width:28px;height:28px;object-fit:contain"></div>';
+  }
+  if(def.emoji){
+    return '<div '+klik+'style="cursor:pointer;position:absolute;left:'+(sx-11)+'px;top:'+(sy-12)+'px;z-index:'+z+';font-size:20px">'+def.emoji+'</div>';
+  }
+  var kl=(type==="water"?" iso-water":"");
+  var glans=def.glans?"box-shadow:0 0 8px 2px #ffe98a;":"";
+  var kleur=def.kleur;
+  // linker zijkant (donkerst) en rechter zijkant (half donker) — geven de kubus diepte
+  var lf='<div '+klik+'class="isoface" style="cursor:pointer;position:absolute;left:'+(sx-w/2)+'px;top:'+(sy+ht/2)+'px;width:'+(w/2)+'px;height:'+(ht/2+hv)+'px;background:'+kleur+';filter:brightness(.6);clip-path:polygon(0 0,'+(w/2)+'px '+(ht/2)+'px,'+(w/2)+'px '+(ht/2+hv)+'px,0 '+hv+'px);z-index:'+z+'"></div>';
+  var rf='<div '+klik+'class="isoface" style="cursor:pointer;position:absolute;left:'+sx+'px;top:'+(sy+ht/2)+'px;width:'+(w/2)+'px;height:'+(ht/2+hv)+'px;background:'+kleur+';filter:brightness(.8);clip-path:polygon(0 '+(ht/2)+'px,'+(w/2)+'px 0,'+(w/2)+'px '+hv+'px,0 '+(ht/2+hv)+'px);z-index:'+z+'"></div>';
+  var top='<div '+klik+'class="isoblok'+kl+'" style="cursor:pointer;position:absolute;left:'+(sx-w/2)+'px;top:'+sy+'px;width:'+w+'px;height:'+ht+'px;background:'+kleur+';'+glans+'clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%);z-index:'+z+'"></div>';
+  return lf+rf+top;
+}
+/* alleen de statische tegels (het landschap), nu als 3D-kubussen */
 function bwTilesHtml(wl){
   var ox=wl.h*BW_TILEW/2, cellen="";
   for(var y=0;y<wl.h;y++){ for(var x=0;x<wl.w;x++){
@@ -2109,19 +2265,24 @@ function bwTilesHtml(wl){
     for(var L=0;L<stapel.length;L++){
       var type=stapel[L], def=blokDef(type);
       var sx=(x-y)*BW_TILEW/2 + ox, sy=(x+y)*BW_TILEH/2 - L*BW_LAYERH + BW_OY, z=(x+y)*10+L;
-      var glans=def.glans?"box-shadow:0 0 8px 2px #ffe98a;":"";
-      if(def.emoji){ cellen+='<div style="position:absolute;left:'+(sx-11)+'px;top:'+(sy-12)+'px;z-index:'+z+';font-size:20px">'+def.emoji+'</div>'; }
-      else { cellen+='<div style="position:absolute;left:'+(sx-BW_TILEW/2)+'px;top:'+sy+'px;width:'+BW_TILEW+'px;height:'+BW_TILEH+'px;background:'+def.kleur+';'+glans+'clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%);z-index:'+z+'"></div>'; }
+      cellen+=isoBlokHtml(sx, sy, def, z, x, y, type);
     }
   }}
   return cellen;
+}
+/* Tik op een cel: bouw / hak / loop ernaartoe (afhankelijk van de modus). */
+function bwTikCel(x,y){
+  var w=bwWereld();
+  if(_bw.modus==="weghakken"){ w.pop.x=x; w.pop.y=y; bwHak(x,y); }
+  else if(_bw.modus==="bouwen"){ w.pop.x=x; w.pop.y=y; bwPlaats(x,y); }
+  else { w.pop.x=x; w.pop.y=y; oogst(x,y); bewaarState(); bwTekenLeven(); }   // avontuur: erheen lopen
 }
 function bwTeken(){
   var inh=document.getElementById("spelInhoud"); if(!inh)return; var wl=bwWereld();
   var breedte=(wl.w+wl.h)*BW_TILEW/2, hoogte=(wl.w+wl.h)*BW_TILEH/2 + BW_MAXHOOG*BW_LAYERH + 60;
 
   var palet=Object.keys(BLOKKEN).map(function(b){ var d=BLOKKEN[b];
-    var icoon=d.emoji||'<span style="display:inline-block;width:16px;height:16px;border-radius:5px;background:'+d.kleur+'"></span>';
+    var icoon=d.afbeelding?'<img src="'+d.afbeelding+'" style="width:24px;height:24px;object-fit:contain">':(d.emoji||'<span style="display:inline-block;width:16px;height:16px;border-radius:5px;background:'+d.kleur+'"></span>');
     var sel=_bw.blok===b&&_bw.modus==="bouwen"?"outline:3px solid var(--accent);":"";
     return '<button style="min-width:44px;min-height:44px;'+sel+'" title="'+b+' ('+d.prijs+')" onclick="bwKiesBlok(\''+b+'\')">'+icoon+'</button>';
   }).join("");
@@ -2145,6 +2306,7 @@ function bwTeken(){
    +'</div>'
    +'<div class="rij" style="justify-content:center;flex-wrap:wrap">'+palet+'</div>'
    +'<div class="rij" style="justify-content:center;align-items:center;flex-wrap:wrap"><span class="klein">🐾 Maatje erbij:</span>'+levenKoop+'</div>'
+   +'<div class="klein midden" style="margin:.2em 0">👆 Kies een blok en <b>tik op de grond</b> om te bouwen — of loop met de pijltjes en gebruik ✋</div>'
    +'<div style="overflow:auto;max-width:100%;max-height:58vh;border-radius:22px;background:#ffffff33;padding:6px"><div id="bwVeld" style="position:relative;width:'+breedte+'px;height:'+hoogte+'px;margin:0 auto"><div id="bwTiles">'+bwTilesHtml(wl)+'</div><div id="bwLeven"></div></div></div>'
    +'<div class="midden">'
      +'<div><button onclick="bwBeweeg(0,-1)">⬆️</button></div>'
@@ -2163,12 +2325,12 @@ function bwSpawnLeven(){
   var w=bwWereld();
   (w.wezens||[]).forEach(function(z){
     var el=document.createElement("div"); el.className="bwwezen";
-    if(z.afb){ el.innerHTML='<img class="wimg" src="'+z.afb+'" alt="">'; } else { el.textContent=z.s; }
+    var _wafb=wezenAfb(z); if(_wafb){ el.innerHTML='<img class="wimg" src="'+_wafb+'" alt="">'; } else { el.textContent=z.s; }
     laag.appendChild(el); _bw.nodes.push(el);
   });
   // Het bestuurbare poppetje: duidelijk gemarkeerd met de eigen naam erboven, zodat het opvalt.
   var pel=document.createElement("div"); pel.className="bwpop";
-  pel.innerHTML='<span class="jijtag">'+_escNaam(S.naam||"jij")+'</span><span class="jijfig">'+spelerAvatar()+'</span>';
+  pel.innerHTML='<span class="jijtag">'+_escNaam(S.naam||"jij")+'</span><span class="jijfig">'+avatarHtml(spelerAvatar(),28)+'</span>';
   laag.appendChild(pel); _bw.popNode=pel;
   var sp=document.createElement("div"); sp.className="bwspark blij"; sp.textContent="✨";
   laag.appendChild(sp); _bw.sparkleNode=sp;
@@ -2247,7 +2409,7 @@ var FEEDBACK_EMAIL = "mvermaas@nsecure.nl";
 function heeftPremium(){ return TESTMODUS || !!S.premium; }
 function openPremium(){
   var test = TESTMODUS ? '<p class="klein" style="background:#e2f5e6;color:#1e7a2c;padding:.5em;border-radius:10px">🎉 Tijdens de test is <b>alles gratis</b> en volledig ontgrendeld. Je hoeft niets te kopen.</p>' : '';
-  var html = '<div class="premiumkaart"><h2>⭐ Blokwereld Premium</h2>'
+  var html = '<div class="premiumkaart"><h2>⭐ Archito Premium</h2>'
     + '<p>Met Premium krijgt je kind straks:</p>'
     + '<ul><li>Alle niveaus en 100 levels per spel</li><li>Het complete Beeldlab en alle werelden</li><li>Alle talen, denk- en beelddenkpuzzels</li><li>Geen limieten — onbeperkt oefenen en bouwen</li></ul></div>'
     + test
@@ -2265,7 +2427,7 @@ function premiumInteresse(){
   speelGeluid && speelGeluid("schat");
 }
 function stuurFeedback(){
-  var onderwerp = encodeURIComponent("Blokwereld test-feedback (v"+APP_VERSIE+")");
+  var onderwerp = encodeURIComponent("Archito test-feedback (v"+APP_VERSIE+")");
   var body = encodeURIComponent("Wat vond je kind leuk?\n\nWat kan beter?\n\nWerkte alles goed op je toestel? (iPhone/Android + model)\n\n");
   try{ location.href = "mailto:"+FEEDBACK_EMAIL+"?subject="+onderwerp+"&body="+body; }catch(e){}
 }
@@ -2279,15 +2441,15 @@ if(typeof window!=="undefined"){
 }
 function installeerApp(){
   if(_installPrompt){ _installPrompt.prompt(); _installPrompt.userChoice.finally(function(){ _installPrompt=null; var b=document.getElementById("knopInstall"); if(b) b.hidden=true; }); }
-  else if(isIOS()){ openOverlay('<h2>📲 Zet op je beginscherm</h2><p>Op de iPhone/iPad:</p><ol><li>Tik onderin op het <b>deel-icoon</b> (het vierkantje met pijltje omhoog).</li><li>Kies <b>Zet op beginscherm</b>.</li><li>Tik op <b>Voeg toe</b>.</li></ol><p class="klein">Daarna opent Blokwereld als een echte app, zonder browserbalk.</p>'); }
+  else if(isIOS()){ openOverlay('<h2>📲 Zet op je beginscherm</h2><p>Op de iPhone/iPad:</p><ol><li>Tik onderin op het <b>deel-icoon</b> (het vierkantje met pijltje omhoog).</li><li>Kies <b>Zet op beginscherm</b>.</li><li>Tik op <b>Voeg toe</b>.</li></ol><p class="klein">Daarna opent Archito als een echte app, zonder browserbalk.</p>'); }
   else { openOverlay('<h2>📲 App installeren</h2><p>Open het menu van je browser (⋮) en kies <b>App installeren</b> of <b>Toevoegen aan startscherm</b>.</p>'); }
 }
 function toonInstallTip(){
   var t=document.getElementById("installTip"); if(!t) return;
   if(isStandalone() || S.installTipWeg){ t.hidden=true; return; }
   var tekst = isIOS()
-    ? '📲 Tip: zet Blokwereld op je beginscherm — tik op <b>deel</b> ⬆️ en <b>Zet op beginscherm</b>.'
-    : '📲 Zet Blokwereld als app op je toestel voor de fijnste ervaring.';
+    ? '📲 Tip: zet Archito op je beginscherm — tik op <b>deel</b> ⬆️ en <b>Zet op beginscherm</b>.'
+    : '📲 Zet Archito als app op je toestel voor de fijnste ervaring.';
   var knop = isIOS() ? '<button onclick="installeerApp()">Hoe?</button>' : '<button onclick="installeerApp()">Installeer</button>';
   t.innerHTML = '<span>'+tekst+'</span><span class="rij">'+knop+'<button onclick="sluitInstallTip()" title="Sluiten">✕</button></span>';
   t.hidden=false;
@@ -2299,17 +2461,33 @@ function init(){
   laadState(); laadStemmen();
   if(window.speechSynthesis){ window.speechSynthesis.onvoiceschanged = laadStemmen; }
   pasThemaToe(); startSchermtijdKlok();
-  if(!S.naam){ startOnboarding(); } else { updateHud(); }
+  if(!S.naam){ startOnboarding(); }
+  else { updateHud(); if(aantalProfielen()>1) kiesProfielScherm(); }   // terugkomen: eerst kiezen met welk kind je verder gaat
   var v=document.getElementById("versie"); if(v) v.textContent="v"+APP_VERSIE;
   toonInstallTip();
   ontgrendelAudioBijGebaar();
   registreerServiceWorker();
 }
-/* iOS/Chrome: audio pas toegestaan na een gebruikersgebaar — daarom bij de eerste tik/toets de context wakker maken. */
+/* iOS/Chrome: audio mag pas na een gebruikersgebaar, en wordt weer gepauzeerd als je de app
+   wegklikt. Daarom bij ELKE tik/toets de audiocontext wakker maken (niet alleen de eerste keer),
+   met een stille buffer om iOS echt te ontgrendelen, en opnieuw activeren bij terugkeer in de app. */
+var _audioWakker = false;
+function wekAudio(){
+  try{
+    var ac = audioCtx(); if(!ac) return;
+    if(ac.state==="suspended" && ac.resume) ac.resume();
+    if(!_audioWakker && ac.createBuffer){                  // iOS: één stille buffer ontgrendelt de audio echt
+      var b=ac.createBuffer(1,1,22050), s=ac.createBufferSource();
+      s.buffer=b; s.connect(ac.destination); s.start(0); _audioWakker=true;
+    }
+    if(S.muziekAan && !_muziek) startMuziek();
+  }catch(e){}
+}
 function ontgrendelAudioBijGebaar(){
   if(typeof window==="undefined") return;
-  var wek = function(){ try{ var ac=audioCtx(); if(ac && ac.state==="suspended" && ac.resume) ac.resume(); if(S.muziekAan && !_muziek) startMuziek(); }catch(e){} };
-  ["pointerdown","touchstart","keydown","click"].forEach(function(ev){ window.addEventListener(ev, wek, {passive:true}); });
+  ["pointerdown","touchstart","keydown","click"].forEach(function(ev){ window.addEventListener(ev, wekAudio, {passive:true}); });
+  try{ document.addEventListener("visibilitychange", function(){ if(!document.hidden) wekAudio(); }); }catch(e){}
+  try{ window.addEventListener("focus", wekAudio); }catch(e){}
 }
 /* Service worker registreren + automatisch bijwerken naar de nieuwste versie. */
 function registreerServiceWorker(){

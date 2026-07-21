@@ -1,13 +1,11 @@
-// data/talen.js — woordenschat Engels 🇬🇧 en Spaans 🇪🇸.
-// Voor ouders: elk item is { nl, en, es, plaatje, niveau }. Het kind ziet plaatje + NL-woord
-// en kiest het juiste woord in de doeltaal. Elk niveau bouwt op het vorige voort.
-
+// data/talen.js — woordenschat; 'afb' = tegel-afbeelding (valt terug op emoji als leeg).
 var TALEN = [
   {
     "nl": "kat",
     "en": "cat",
     "es": "gato",
     "plaatje": "🐱",
+    "afb": "tegels/tegel-kat.png",
     "niveau": 1
   },
   {
@@ -15,6 +13,7 @@ var TALEN = [
     "en": "dog",
     "es": "perro",
     "plaatje": "🐶",
+    "afb": "tegels/tegel-hond.png",
     "niveau": 1
   },
   {
@@ -22,6 +21,7 @@ var TALEN = [
     "en": "fish",
     "es": "pez",
     "plaatje": "🐟",
+    "afb": "tegels/tegel-vis.png",
     "niveau": 1
   },
   {
@@ -29,6 +29,7 @@ var TALEN = [
     "en": "cow",
     "es": "vaca",
     "plaatje": "🐮",
+    "afb": "tegels/tegel-koe.png",
     "niveau": 1
   },
   {
@@ -36,6 +37,7 @@ var TALEN = [
     "en": "horse",
     "es": "caballo",
     "plaatje": "🐴",
+    "afb": "tegels/tegel-paard.png",
     "niveau": 1
   },
   {
@@ -43,6 +45,7 @@ var TALEN = [
     "en": "tree",
     "es": "árbol",
     "plaatje": "🌳",
+    "afb": "tegels/tegel-boom.png",
     "niveau": 1
   },
   {
@@ -50,6 +53,7 @@ var TALEN = [
     "en": "flower",
     "es": "flor",
     "plaatje": "🌸",
+    "afb": "tegels/tegel-bloem.png",
     "niveau": 1
   },
   {
@@ -57,6 +61,7 @@ var TALEN = [
     "en": "sun",
     "es": "sol",
     "plaatje": "☀️",
+    "afb": "tegels/tegel-zon.png",
     "niveau": 1
   },
   {
@@ -64,6 +69,7 @@ var TALEN = [
     "en": "moon",
     "es": "luna",
     "plaatje": "🌙",
+    "afb": "tegels/tegel-maan.png",
     "niveau": 1
   },
   {
@@ -71,6 +77,7 @@ var TALEN = [
     "en": "house",
     "es": "casa",
     "plaatje": "🏠",
+    "afb": "tegels/tegel-huis.png",
     "niveau": 1
   },
   {
@@ -78,6 +85,7 @@ var TALEN = [
     "en": "car",
     "es": "coche",
     "plaatje": "🚗",
+    "afb": "tegels/tegel-auto.png",
     "niveau": 1
   },
   {
@@ -85,6 +93,7 @@ var TALEN = [
     "en": "ball",
     "es": "pelota",
     "plaatje": "⚽",
+    "afb": "tegels/tegel-bal.png",
     "niveau": 1
   },
   {
@@ -92,6 +101,7 @@ var TALEN = [
     "en": "apple",
     "es": "manzana",
     "plaatje": "🍎",
+    "afb": "tegels/tegel-appel.png",
     "niveau": 1
   },
   {
@@ -99,6 +109,7 @@ var TALEN = [
     "en": "book",
     "es": "libro",
     "plaatje": "📖",
+    "afb": "tegels/tegel-boek.png",
     "niveau": 1
   },
   {
@@ -106,6 +117,7 @@ var TALEN = [
     "en": "water",
     "es": "agua",
     "plaatje": "💧",
+    "afb": "tegels/tegel-water.png",
     "niveau": 1
   },
   {
@@ -113,6 +125,7 @@ var TALEN = [
     "en": "red",
     "es": "rojo",
     "plaatje": "🟥",
+    "afb": "tegels/tegel-rood.png",
     "niveau": 2
   },
   {
@@ -120,6 +133,7 @@ var TALEN = [
     "en": "blue",
     "es": "azul",
     "plaatje": "🟦",
+    "afb": "tegels/tegel-blauw.png",
     "niveau": 2
   },
   {
@@ -127,6 +141,7 @@ var TALEN = [
     "en": "green",
     "es": "verde",
     "plaatje": "🟩",
+    "afb": "tegels/tegel-groen.png",
     "niveau": 2
   },
   {
@@ -134,6 +149,7 @@ var TALEN = [
     "en": "yellow",
     "es": "amarillo",
     "plaatje": "🟨",
+    "afb": "tegels/tegel-geel.png",
     "niveau": 2
   },
   {
@@ -141,6 +157,7 @@ var TALEN = [
     "en": "bird",
     "es": "pájaro",
     "plaatje": "🐦",
+    "afb": "tegels/tegel-vogel.png",
     "niveau": 2
   },
   {
@@ -148,6 +165,7 @@ var TALEN = [
     "en": "boat",
     "es": "barco",
     "plaatje": "⛵",
+    "afb": "tegels/tegel-boot.png",
     "niveau": 2
   },
   {
@@ -155,6 +173,7 @@ var TALEN = [
     "en": "star",
     "es": "estrella",
     "plaatje": "⭐",
+    "afb": "tegels/tegel-ster.png",
     "niveau": 2
   },
   {
@@ -162,6 +181,7 @@ var TALEN = [
     "en": "cake",
     "es": "pastel",
     "plaatje": "🎂",
+    "afb": "tegels/tegel-taart.png",
     "niveau": 2
   },
   {
@@ -169,6 +189,7 @@ var TALEN = [
     "en": "milk",
     "es": "leche",
     "plaatje": "🥛",
+    "afb": "tegels/tegel-melk.png",
     "niveau": 2
   },
   {
@@ -176,6 +197,7 @@ var TALEN = [
     "en": "bread",
     "es": "pan",
     "plaatje": "🍞",
+    "afb": "tegels/tegel-brood.png",
     "niveau": 2
   },
   {
@@ -183,6 +205,7 @@ var TALEN = [
     "en": "hand",
     "es": "mano",
     "plaatje": "✋",
+    "afb": "tegels/tegel-hand.png",
     "niveau": 2
   },
   {
@@ -190,6 +213,7 @@ var TALEN = [
     "en": "eye",
     "es": "ojo",
     "plaatje": "👁️",
+    "afb": "tegels/tegel-oog.png",
     "niveau": 2
   },
   {
@@ -197,6 +221,7 @@ var TALEN = [
     "en": "one",
     "es": "uno",
     "plaatje": "1️⃣",
+    "afb": "tegels/tegel-één.png",
     "niveau": 2
   },
   {
@@ -204,6 +229,7 @@ var TALEN = [
     "en": "two",
     "es": "dos",
     "plaatje": "2️⃣",
+    "afb": "tegels/tegel-twee.png",
     "niveau": 2
   },
   {
@@ -211,6 +237,7 @@ var TALEN = [
     "en": "three",
     "es": "tres",
     "plaatje": "3️⃣",
+    "afb": "tegels/tegel-drie.png",
     "niveau": 2
   },
   {
@@ -218,6 +245,7 @@ var TALEN = [
     "en": "rain",
     "es": "lluvia",
     "plaatje": "🌧️",
+    "afb": "tegels/tegel-regen.png",
     "niveau": 3
   },
   {
@@ -225,6 +253,7 @@ var TALEN = [
     "en": "snow",
     "es": "nieve",
     "plaatje": "❄️",
+    "afb": "tegels/tegel-sneeuw.png",
     "niveau": 3
   },
   {
@@ -232,6 +261,7 @@ var TALEN = [
     "en": "butterfly",
     "es": "mariposa",
     "plaatje": "🦋",
+    "afb": "tegels/tegel-vlinder.png",
     "niveau": 3
   },
   {
@@ -239,6 +269,7 @@ var TALEN = [
     "en": "frog",
     "es": "rana",
     "plaatje": "🐸",
+    "afb": "tegels/tegel-kikker.png",
     "niveau": 3
   },
   {
@@ -246,6 +277,7 @@ var TALEN = [
     "en": "rocket",
     "es": "cohete",
     "plaatje": "🚀",
+    "afb": "tegels/tegel-raket.png",
     "niveau": 3
   },
   {
@@ -253,6 +285,7 @@ var TALEN = [
     "en": "rainbow",
     "es": "arcoíris",
     "plaatje": "🌈",
+    "afb": "tegels/tegel-regenboog.png",
     "niveau": 3
   },
   {
@@ -260,6 +293,7 @@ var TALEN = [
     "en": "school",
     "es": "escuela",
     "plaatje": "🏫",
+    "afb": "tegels/tegel-school.png",
     "niveau": 3
   },
   {
@@ -267,6 +301,7 @@ var TALEN = [
     "en": "friend",
     "es": "amigo",
     "plaatje": "🧑‍🤝‍🧑",
+    "afb": "tegels/tegel-vriend.png",
     "niveau": 3
   },
   {
@@ -274,6 +309,7 @@ var TALEN = [
     "en": "happy",
     "es": "feliz",
     "plaatje": "😀",
+    "afb": "tegels/tegel-gelukkig.png",
     "niveau": 3
   },
   {
@@ -281,6 +317,7 @@ var TALEN = [
     "en": "big",
     "es": "grande",
     "plaatje": "🐘",
+    "afb": "tegels/tegel-groot.png",
     "niveau": 3
   },
   {
@@ -288,6 +325,7 @@ var TALEN = [
     "en": "small",
     "es": "pequeño",
     "plaatje": "🐭",
+    "afb": "tegels/tegel-klein.png",
     "niveau": 3
   },
   {
@@ -295,6 +333,7 @@ var TALEN = [
     "en": "fast",
     "es": "rápido",
     "plaatje": "⚡",
+    "afb": "tegels/tegel-snel.png",
     "niveau": 3
   },
   {
@@ -302,6 +341,7 @@ var TALEN = [
     "en": "mountain",
     "es": "montaña",
     "plaatje": "⛰️",
+    "afb": "tegels/tegel-berg.png",
     "niveau": 3
   },
   {
@@ -309,6 +349,7 @@ var TALEN = [
     "en": "sea",
     "es": "mar",
     "plaatje": "🌊",
+    "afb": "tegels/tegel-zee.png",
     "niveau": 3
   },
   {
@@ -316,6 +357,7 @@ var TALEN = [
     "en": "night",
     "es": "noche",
     "plaatje": "🌃",
+    "afb": "tegels/tegel-nacht.png",
     "niveau": 3
   },
   {
@@ -323,6 +365,7 @@ var TALEN = [
     "en": "sheep",
     "es": "oveja",
     "plaatje": "🐑",
+    "afb": "tegels/tegel-schaap.png",
     "niveau": 2
   },
   {
@@ -330,6 +373,7 @@ var TALEN = [
     "en": "pig",
     "es": "cerdo",
     "plaatje": "🐷",
+    "afb": "tegels/tegel-varken.png",
     "niveau": 1
   },
   {
@@ -337,6 +381,7 @@ var TALEN = [
     "en": "chicken",
     "es": "gallina",
     "plaatje": "🐔",
+    "afb": "tegels/tegel-kip.png",
     "niveau": 1
   },
   {
@@ -344,6 +389,7 @@ var TALEN = [
     "en": "duck",
     "es": "pato",
     "plaatje": "🦆",
+    "afb": "tegels/tegel-eend.png",
     "niveau": 1
   },
   {
@@ -351,6 +397,7 @@ var TALEN = [
     "en": "rabbit",
     "es": "conejo",
     "plaatje": "🐰",
+    "afb": "tegels/tegel-konijn.png",
     "niveau": 1
   },
   {
@@ -358,6 +405,7 @@ var TALEN = [
     "en": "mouse",
     "es": "ratón",
     "plaatje": "🐭",
+    "afb": "tegels/tegel-muis.png",
     "niveau": 1
   },
   {
@@ -365,6 +413,7 @@ var TALEN = [
     "en": "bear",
     "es": "oso",
     "plaatje": "🐻",
+    "afb": "tegels/tegel-beer.png",
     "niveau": 2
   },
   {
@@ -372,6 +421,7 @@ var TALEN = [
     "en": "lion",
     "es": "león",
     "plaatje": "🦁",
+    "afb": "tegels/tegel-leeuw.png",
     "niveau": 2
   },
   {
@@ -379,6 +429,7 @@ var TALEN = [
     "en": "tiger",
     "es": "tigre",
     "plaatje": "🐯",
+    "afb": "tegels/tegel-tijger.png",
     "niveau": 2
   },
   {
@@ -386,6 +437,7 @@ var TALEN = [
     "en": "elephant",
     "es": "elefante",
     "plaatje": "🐘",
+    "afb": "tegels/tegel-olifant.png",
     "niveau": 2
   },
   {
@@ -393,6 +445,7 @@ var TALEN = [
     "en": "monkey",
     "es": "mono",
     "plaatje": "🐵",
+    "afb": "tegels/tegel-aap.png",
     "niveau": 2
   },
   {
@@ -400,6 +453,7 @@ var TALEN = [
     "en": "giraffe",
     "es": "jirafa",
     "plaatje": "🦒",
+    "afb": "tegels/tegel-giraf.png",
     "niveau": 3
   },
   {
@@ -407,6 +461,7 @@ var TALEN = [
     "en": "zebra",
     "es": "cebra",
     "plaatje": "🦓",
+    "afb": "tegels/tegel-zebra.png",
     "niveau": 3
   },
   {
@@ -414,6 +469,7 @@ var TALEN = [
     "en": "snake",
     "es": "serpiente",
     "plaatje": "🐍",
+    "afb": "tegels/tegel-slang.png",
     "niveau": 2
   },
   {
@@ -421,6 +477,7 @@ var TALEN = [
     "en": "turtle",
     "es": "tortuga",
     "plaatje": "🐢",
+    "afb": "tegels/tegel-schildpad.png",
     "niveau": 2
   },
   {
@@ -428,6 +485,7 @@ var TALEN = [
     "en": "bee",
     "es": "abeja",
     "plaatje": "🐝",
+    "afb": "tegels/tegel-bij.png",
     "niveau": 2
   },
   {
@@ -435,6 +493,7 @@ var TALEN = [
     "en": "ant",
     "es": "hormiga",
     "plaatje": "🐜",
+    "afb": "tegels/tegel-mier.png",
     "niveau": 2
   },
   {
@@ -442,6 +501,7 @@ var TALEN = [
     "en": "owl",
     "es": "búho",
     "plaatje": "🦉",
+    "afb": "tegels/tegel-uil.png",
     "niveau": 2
   },
   {
@@ -449,6 +509,7 @@ var TALEN = [
     "en": "penguin",
     "es": "pingüino",
     "plaatje": "🐧",
+    "afb": "tegels/tegel-pinguin.png",
     "niveau": 2
   },
   {
@@ -456,6 +517,7 @@ var TALEN = [
     "en": "dolphin",
     "es": "delfín",
     "plaatje": "🐬",
+    "afb": "tegels/tegel-dolfijn.png",
     "niveau": 2
   },
   {
@@ -463,6 +525,7 @@ var TALEN = [
     "en": "whale",
     "es": "ballena",
     "plaatje": "🐋",
+    "afb": "tegels/tegel-walvis.png",
     "niveau": 3
   },
   {
@@ -470,6 +533,7 @@ var TALEN = [
     "en": "shark",
     "es": "tiburón",
     "plaatje": "🦈",
+    "afb": "tegels/tegel-haai.png",
     "niveau": 3
   },
   {
@@ -477,6 +541,7 @@ var TALEN = [
     "en": "crab",
     "es": "cangrejo",
     "plaatje": "🦀",
+    "afb": "tegels/tegel-krab.png",
     "niveau": 2
   },
   {
@@ -484,6 +549,7 @@ var TALEN = [
     "en": "octopus",
     "es": "pulpo",
     "plaatje": "🐙",
+    "afb": "tegels/tegel-octopus.png",
     "niveau": 3
   },
   {
@@ -491,6 +557,7 @@ var TALEN = [
     "en": "fox",
     "es": "zorro",
     "plaatje": "🦊",
+    "afb": "tegels/tegel-vos.png",
     "niveau": 2
   },
   {
@@ -498,6 +565,7 @@ var TALEN = [
     "en": "wolf",
     "es": "lobo",
     "plaatje": "🐺",
+    "afb": "tegels/tegel-wolf.png",
     "niveau": 2
   },
   {
@@ -505,6 +573,7 @@ var TALEN = [
     "en": "deer",
     "es": "ciervo",
     "plaatje": "🦌",
+    "afb": "tegels/tegel-hert.png",
     "niveau": 3
   },
   {
@@ -512,6 +581,7 @@ var TALEN = [
     "en": "snail",
     "es": "caracol",
     "plaatje": "🐌",
+    "afb": "tegels/tegel-slak.png",
     "niveau": 2
   },
   {
@@ -519,6 +589,7 @@ var TALEN = [
     "en": "camel",
     "es": "camello",
     "plaatje": "🐫",
+    "afb": "tegels/tegel-kameel.png",
     "niveau": 3
   },
   {
@@ -526,6 +597,7 @@ var TALEN = [
     "en": "kitten",
     "es": "gatito",
     "plaatje": "🐈",
+    "afb": "tegels/tegel-poes.png",
     "niveau": 1
   },
   {
@@ -533,6 +605,7 @@ var TALEN = [
     "en": "hamster",
     "es": "hámster",
     "plaatje": "🐹",
+    "afb": "tegels/tegel-hamster.png",
     "niveau": 2
   },
   {
@@ -540,6 +613,7 @@ var TALEN = [
     "en": "turkey",
     "es": "pavo",
     "plaatje": "🦃",
+    "afb": "tegels/tegel-kalkoen.png",
     "niveau": 3
   },
   {
@@ -547,6 +621,7 @@ var TALEN = [
     "en": "banana",
     "es": "plátano",
     "plaatje": "🍌",
+    "afb": "tegels/tegel-banaan.png",
     "niveau": 1
   },
   {
@@ -554,6 +629,7 @@ var TALEN = [
     "en": "grapes",
     "es": "uvas",
     "plaatje": "🍇",
+    "afb": "tegels/tegel-druiven.png",
     "niveau": 1
   },
   {
@@ -561,6 +637,7 @@ var TALEN = [
     "en": "orange",
     "es": "naranja",
     "plaatje": "🍊",
+    "afb": "tegels/tegel-sinaasappel.png",
     "niveau": 2
   },
   {
@@ -568,6 +645,7 @@ var TALEN = [
     "en": "strawberry",
     "es": "fresa",
     "plaatje": "🍓",
+    "afb": "tegels/tegel-aardbei.png",
     "niveau": 2
   },
   {
@@ -575,6 +653,7 @@ var TALEN = [
     "en": "lemon",
     "es": "limón",
     "plaatje": "🍋",
+    "afb": "tegels/tegel-citroen.png",
     "niveau": 2
   },
   {
@@ -582,6 +661,7 @@ var TALEN = [
     "en": "cherry",
     "es": "cereza",
     "plaatje": "🍒",
+    "afb": "tegels/tegel-kers.png",
     "niveau": 2
   },
   {
@@ -589,6 +669,7 @@ var TALEN = [
     "en": "pear",
     "es": "pera",
     "plaatje": "🍐",
+    "afb": "tegels/tegel-peer.png",
     "niveau": 2
   },
   {
@@ -596,6 +677,7 @@ var TALEN = [
     "en": "melon",
     "es": "melón",
     "plaatje": "🍉",
+    "afb": "tegels/tegel-meloen.png",
     "niveau": 3
   },
   {
@@ -603,6 +685,7 @@ var TALEN = [
     "en": "pineapple",
     "es": "piña",
     "plaatje": "🍍",
+    "afb": "tegels/tegel-ananas.png",
     "niveau": 3
   },
   {
@@ -610,6 +693,7 @@ var TALEN = [
     "en": "peach",
     "es": "durazno",
     "plaatje": "🍑",
+    "afb": "tegels/tegel-perzik.png",
     "niveau": 3
   },
   {
@@ -617,6 +701,7 @@ var TALEN = [
     "en": "cheese",
     "es": "queso",
     "plaatje": "🧀",
+    "afb": "tegels/tegel-kaas.png",
     "niveau": 1
   },
   {
@@ -624,6 +709,7 @@ var TALEN = [
     "en": "egg",
     "es": "huevo",
     "plaatje": "🥚",
+    "afb": "tegels/tegel-ei.png",
     "niveau": 1
   },
   {
@@ -631,6 +717,7 @@ var TALEN = [
     "en": "cookie",
     "es": "galleta",
     "plaatje": "🍪",
+    "afb": "tegels/tegel-koekje.png",
     "niveau": 2
   },
   {
@@ -638,6 +725,7 @@ var TALEN = [
     "en": "ice cream",
     "es": "helado",
     "plaatje": "🍦",
+    "afb": "tegels/tegel-ijs.png",
     "niveau": 1
   },
   {
@@ -645,6 +733,7 @@ var TALEN = [
     "en": "candy",
     "es": "dulce",
     "plaatje": "🍬",
+    "afb": "tegels/tegel-snoep.png",
     "niveau": 2
   },
   {
@@ -652,6 +741,7 @@ var TALEN = [
     "en": "chocolate",
     "es": "chocolate",
     "plaatje": "🍫",
+    "afb": "tegels/tegel-chocola.png",
     "niveau": 2
   },
   {
@@ -659,6 +749,7 @@ var TALEN = [
     "en": "pizza",
     "es": "pizza",
     "plaatje": "🍕",
+    "afb": "tegels/tegel-pizza.png",
     "niveau": 1
   },
   {
@@ -666,6 +757,7 @@ var TALEN = [
     "en": "carrot",
     "es": "zanahoria",
     "plaatje": "🥕",
+    "afb": "tegels/tegel-wortel.png",
     "niveau": 2
   },
   {
@@ -673,6 +765,7 @@ var TALEN = [
     "en": "tomato",
     "es": "tomate",
     "plaatje": "🍅",
+    "afb": "tegels/tegel-tomaat.png",
     "niveau": 1
   },
   {
@@ -680,6 +773,7 @@ var TALEN = [
     "en": "corn",
     "es": "maíz",
     "plaatje": "🌽",
+    "afb": "tegels/tegel-mais.png",
     "niveau": 2
   },
   {
@@ -687,6 +781,7 @@ var TALEN = [
     "en": "mushroom",
     "es": "champiñón",
     "plaatje": "🍄",
+    "afb": "tegels/tegel-champignon.png",
     "niveau": 2
   },
   {
@@ -694,6 +789,7 @@ var TALEN = [
     "en": "broccoli",
     "es": "brócoli",
     "plaatje": "🥦",
+    "afb": "tegels/tegel-broccoli.png",
     "niveau": 3
   },
   {
@@ -701,6 +797,7 @@ var TALEN = [
     "en": "potato",
     "es": "papa",
     "plaatje": "🥔",
+    "afb": "tegels/tegel-aardappel.png",
     "niveau": 2
   },
   {
@@ -708,6 +805,7 @@ var TALEN = [
     "en": "grape",
     "es": "uva",
     "plaatje": "🍇",
+    "afb": "tegels/tegel-druif.png",
     "niveau": 2
   },
   {
@@ -715,6 +813,7 @@ var TALEN = [
     "en": "hamburger",
     "es": "hamburguesa",
     "plaatje": "🍔",
+    "afb": "tegels/tegel-hamburger.png",
     "niveau": 2
   },
   {
@@ -722,6 +821,7 @@ var TALEN = [
     "en": "fries",
     "es": "papas fritas",
     "plaatje": "🍟",
+    "afb": "tegels/tegel-frietjes.png",
     "niveau": 2
   },
   {
@@ -729,6 +829,7 @@ var TALEN = [
     "en": "juice",
     "es": "jugo",
     "plaatje": "🧃",
+    "afb": "tegels/tegel-appelsap.png",
     "niveau": 2
   },
   {
@@ -736,6 +837,7 @@ var TALEN = [
     "en": "honey",
     "es": "miel",
     "plaatje": "🍯",
+    "afb": "tegels/tegel-honing.png",
     "niveau": 3
   },
   {
@@ -743,6 +845,7 @@ var TALEN = [
     "en": "cloud",
     "es": "nube",
     "plaatje": "☁️",
+    "afb": "tegels/tegel-wolk.png",
     "niveau": 1
   },
   {
@@ -750,6 +853,7 @@ var TALEN = [
     "en": "leaf",
     "es": "hoja",
     "plaatje": "🍃",
+    "afb": "tegels/tegel-blad.png",
     "niveau": 2
   },
   {
@@ -757,6 +861,7 @@ var TALEN = [
     "en": "grass",
     "es": "hierba",
     "plaatje": "🌱",
+    "afb": "tegels/tegel-gras.png",
     "niveau": 2
   },
   {
@@ -764,6 +869,7 @@ var TALEN = [
     "en": "fire",
     "es": "fuego",
     "plaatje": "🔥",
+    "afb": "tegels/tegel-vuur.png",
     "niveau": 2
   },
   {
@@ -771,6 +877,7 @@ var TALEN = [
     "en": "cactus",
     "es": "cactus",
     "plaatje": "🌵",
+    "afb": "tegels/tegel-cactus.png",
     "niveau": 3
   },
   {
@@ -778,6 +885,7 @@ var TALEN = [
     "en": "palm",
     "es": "palmera",
     "plaatje": "🌴",
+    "afb": "tegels/tegel-palmboom.png",
     "niveau": 3
   },
   {
@@ -785,6 +893,7 @@ var TALEN = [
     "en": "lightning",
     "es": "rayo",
     "plaatje": "⚡",
+    "afb": "tegels/tegel-bliksem.png",
     "niveau": 3
   },
   {
@@ -792,6 +901,7 @@ var TALEN = [
     "en": "drop",
     "es": "gota",
     "plaatje": "💧",
+    "afb": "tegels/tegel-druppel.png",
     "niveau": 2
   },
   {
@@ -799,6 +909,7 @@ var TALEN = [
     "en": "shell",
     "es": "concha",
     "plaatje": "🐚",
+    "afb": "tegels/tegel-schelp.png",
     "niveau": 3
   },
   {
@@ -806,6 +917,7 @@ var TALEN = [
     "en": "volcano",
     "es": "volcán",
     "plaatje": "🌋",
+    "afb": "tegels/tegel-vulkaan.png",
     "niveau": 3
   },
   {
@@ -813,6 +925,7 @@ var TALEN = [
     "en": "door",
     "es": "puerta",
     "plaatje": "🚪",
+    "afb": "tegels/tegel-deur.png",
     "niveau": 1
   },
   {
@@ -820,6 +933,7 @@ var TALEN = [
     "en": "window",
     "es": "ventana",
     "plaatje": "🪟",
+    "afb": "tegels/tegel-raam.png",
     "niveau": 2
   },
   {
@@ -827,6 +941,7 @@ var TALEN = [
     "en": "chair",
     "es": "silla",
     "plaatje": "🪑",
+    "afb": "tegels/tegel-stoel.png",
     "niveau": 2
   },
   {
@@ -834,6 +949,7 @@ var TALEN = [
     "en": "bed",
     "es": "cama",
     "plaatje": "🛏️",
+    "afb": "tegels/tegel-bed.png",
     "niveau": 1
   },
   {
@@ -841,6 +957,7 @@ var TALEN = [
     "en": "couch",
     "es": "sofá",
     "plaatje": "🛋️",
+    "afb": "tegels/tegel-bank.png",
     "niveau": 2
   },
   {
@@ -848,6 +965,7 @@ var TALEN = [
     "en": "lamp",
     "es": "lámpara",
     "plaatje": "💡",
+    "afb": "tegels/tegel-lamp.png",
     "niveau": 2
   },
   {
@@ -855,6 +973,7 @@ var TALEN = [
     "en": "clock",
     "es": "reloj",
     "plaatje": "🕐",
+    "afb": "tegels/tegel-klok.png",
     "niveau": 2
   },
   {
@@ -862,6 +981,7 @@ var TALEN = [
     "en": "key",
     "es": "llave",
     "plaatje": "🔑",
+    "afb": "tegels/tegel-sleutel.png",
     "niveau": 2
   },
   {
@@ -869,6 +989,7 @@ var TALEN = [
     "en": "pen",
     "es": "bolígrafo",
     "plaatje": "🖊️",
+    "afb": "tegels/tegel-pen.png",
     "niveau": 2
   },
   {
@@ -876,6 +997,7 @@ var TALEN = [
     "en": "scissors",
     "es": "tijeras",
     "plaatje": "✂️",
+    "afb": "tegels/tegel-schaar.png",
     "niveau": 2
   },
   {
@@ -883,6 +1005,7 @@ var TALEN = [
     "en": "bag",
     "es": "bolsa",
     "plaatje": "👜",
+    "afb": "tegels/tegel-tas.png",
     "niveau": 2
   },
   {
@@ -890,6 +1013,7 @@ var TALEN = [
     "en": "balloon",
     "es": "globo",
     "plaatje": "🎈",
+    "afb": "tegels/tegel-ballon.png",
     "niveau": 1
   },
   {
@@ -897,6 +1021,7 @@ var TALEN = [
     "en": "gift",
     "es": "regalo",
     "plaatje": "🎁",
+    "afb": "tegels/tegel-cadeau.png",
     "niveau": 1
   },
   {
@@ -904,6 +1029,7 @@ var TALEN = [
     "en": "umbrella",
     "es": "paraguas",
     "plaatje": "☂️",
+    "afb": "tegels/tegel-paraplu.png",
     "niveau": 2
   },
   {
@@ -911,6 +1037,7 @@ var TALEN = [
     "en": "glasses",
     "es": "gafas",
     "plaatje": "👓",
+    "afb": "tegels/tegel-bril.png",
     "niveau": 2
   },
   {
@@ -918,6 +1045,7 @@ var TALEN = [
     "en": "hat",
     "es": "sombrero",
     "plaatje": "👒",
+    "afb": "tegels/tegel-hoed.png",
     "niveau": 2
   },
   {
@@ -925,6 +1053,7 @@ var TALEN = [
     "en": "shoe",
     "es": "zapato",
     "plaatje": "👟",
+    "afb": "tegels/tegel-schoen.png",
     "niveau": 1
   },
   {
@@ -932,6 +1061,7 @@ var TALEN = [
     "en": "sock",
     "es": "calcetín",
     "plaatje": "🧦",
+    "afb": "tegels/tegel-sok.png",
     "niveau": 2
   },
   {
@@ -939,6 +1069,7 @@ var TALEN = [
     "en": "coat",
     "es": "abrigo",
     "plaatje": "🧥",
+    "afb": "tegels/tegel-jas.png",
     "niveau": 2
   },
   {
@@ -946,6 +1077,7 @@ var TALEN = [
     "en": "shirt",
     "es": "camisa",
     "plaatje": "👕",
+    "afb": "tegels/tegel-shirt.png",
     "niveau": 1
   },
   {
@@ -953,6 +1085,7 @@ var TALEN = [
     "en": "pants",
     "es": "pantalón",
     "plaatje": "👖",
+    "afb": "tegels/tegel-broek.png",
     "niveau": 2
   },
   {
@@ -960,6 +1093,7 @@ var TALEN = [
     "en": "phone",
     "es": "teléfono",
     "plaatje": "📱",
+    "afb": "tegels/tegel-telefoon.png",
     "niveau": 2
   },
   {
@@ -967,6 +1101,7 @@ var TALEN = [
     "en": "camera",
     "es": "cámara",
     "plaatje": "📷",
+    "afb": "tegels/tegel-camera.png",
     "niveau": 2
   },
   {
@@ -974,6 +1109,7 @@ var TALEN = [
     "en": "pencil",
     "es": "lápiz",
     "plaatje": "✏️",
+    "afb": "tegels/tegel-potlood.png",
     "niveau": 1
   },
   {
@@ -981,6 +1117,7 @@ var TALEN = [
     "en": "crown",
     "es": "corona",
     "plaatje": "👑",
+    "afb": "tegels/tegel-kroon.png",
     "niveau": 2
   },
   {
@@ -988,6 +1125,7 @@ var TALEN = [
     "en": "bus",
     "es": "autobús",
     "plaatje": "🚌",
+    "afb": "tegels/tegel-bus.png",
     "niveau": 1
   },
   {
@@ -995,6 +1133,7 @@ var TALEN = [
     "en": "train",
     "es": "tren",
     "plaatje": "🚆",
+    "afb": "tegels/tegel-trein.png",
     "niveau": 2
   },
   {
@@ -1002,6 +1141,7 @@ var TALEN = [
     "en": "bike",
     "es": "bicicleta",
     "plaatje": "🚲",
+    "afb": "tegels/tegel-fiets.png",
     "niveau": 1
   },
   {
@@ -1009,6 +1149,7 @@ var TALEN = [
     "en": "airplane",
     "es": "avión",
     "plaatje": "✈️",
+    "afb": "tegels/tegel-vliegtuig.png",
     "niveau": 2
   },
   {
@@ -1016,6 +1157,7 @@ var TALEN = [
     "en": "tractor",
     "es": "tractor",
     "plaatje": "🚜",
+    "afb": "tegels/tegel-tractor.png",
     "niveau": 3
   },
   {
@@ -1023,6 +1165,7 @@ var TALEN = [
     "en": "fire truck",
     "es": "bombero",
     "plaatje": "🚒",
+    "afb": "tegels/tegel-brandweer.png",
     "niveau": 3
   },
   {
@@ -1030,6 +1173,7 @@ var TALEN = [
     "en": "police car",
     "es": "policía",
     "plaatje": "🚓",
+    "afb": "tegels/tegel-politie.png",
     "niveau": 3
   },
   {
@@ -1037,6 +1181,7 @@ var TALEN = [
     "en": "helicopter",
     "es": "helicóptero",
     "plaatje": "🚁",
+    "afb": "tegels/tegel-helikopter.png",
     "niveau": 3
   },
   {
@@ -1044,6 +1189,7 @@ var TALEN = [
     "en": "motorbike",
     "es": "moto",
     "plaatje": "🏍️",
+    "afb": "tegels/tegel-motor.png",
     "niveau": 3
   },
   {
@@ -1051,6 +1197,7 @@ var TALEN = [
     "en": "foot",
     "es": "pie",
     "plaatje": "🦶",
+    "afb": "tegels/tegel-voet.png",
     "niveau": 2
   },
   {
@@ -1058,6 +1205,7 @@ var TALEN = [
     "en": "ear",
     "es": "oreja",
     "plaatje": "👂",
+    "afb": "tegels/tegel-oor.png",
     "niveau": 2
   },
   {
@@ -1065,6 +1213,7 @@ var TALEN = [
     "en": "nose",
     "es": "nariz",
     "plaatje": "👃",
+    "afb": "tegels/tegel-neus.png",
     "niveau": 2
   },
   {
@@ -1072,6 +1221,7 @@ var TALEN = [
     "en": "mouth",
     "es": "boca",
     "plaatje": "👄",
+    "afb": "tegels/tegel-mond.png",
     "niveau": 2
   },
   {
@@ -1079,6 +1229,7 @@ var TALEN = [
     "en": "tooth",
     "es": "diente",
     "plaatje": "🦷",
+    "afb": "tegels/tegel-tand.png",
     "niveau": 2
   },
   {
@@ -1086,6 +1237,7 @@ var TALEN = [
     "en": "heart",
     "es": "corazón",
     "plaatje": "❤️",
+    "afb": "tegels/tegel-hart.png",
     "niveau": 1
   },
   {
@@ -1093,6 +1245,7 @@ var TALEN = [
     "en": "baby",
     "es": "bebé",
     "plaatje": "👶",
+    "afb": "tegels/tegel-baby.png",
     "niveau": 1
   },
   {
@@ -1100,6 +1253,7 @@ var TALEN = [
     "en": "boy",
     "es": "niño",
     "plaatje": "👦",
+    "afb": "tegels/tegel-jongen.png",
     "niveau": 1
   },
   {
@@ -1107,6 +1261,7 @@ var TALEN = [
     "en": "girl",
     "es": "niña",
     "plaatje": "👧",
+    "afb": "tegels/tegel-meisje.png",
     "niveau": 1
   },
   {
@@ -1114,6 +1269,7 @@ var TALEN = [
     "en": "grandma",
     "es": "abuela",
     "plaatje": "👵",
+    "afb": "tegels/tegel-oma.png",
     "niveau": 2
   },
   {
@@ -1121,6 +1277,7 @@ var TALEN = [
     "en": "grandpa",
     "es": "abuelo",
     "plaatje": "👴",
+    "afb": "tegels/tegel-opa.png",
     "niveau": 2
   },
   {
@@ -1128,6 +1285,7 @@ var TALEN = [
     "en": "mom",
     "es": "mamá",
     "plaatje": "👩",
+    "afb": "tegels/tegel-mama.png",
     "niveau": 1
   },
   {
@@ -1135,6 +1293,7 @@ var TALEN = [
     "en": "dad",
     "es": "papá",
     "plaatje": "👨",
+    "afb": "tegels/tegel-papa.png",
     "niveau": 1
   },
   {
@@ -1142,6 +1301,7 @@ var TALEN = [
     "en": "purple",
     "es": "morado",
     "plaatje": "🟣",
+    "afb": "tegels/tegel-paars.png",
     "niveau": 2
   },
   {
@@ -1149,6 +1309,7 @@ var TALEN = [
     "en": "orange",
     "es": "naranja",
     "plaatje": "🟠",
+    "afb": "tegels/tegel-oranje.png",
     "niveau": 2
   },
   {
@@ -1156,6 +1317,7 @@ var TALEN = [
     "en": "black",
     "es": "negro",
     "plaatje": "⚫",
+    "afb": "tegels/tegel-zwart.png",
     "niveau": 2
   },
   {
@@ -1163,6 +1325,7 @@ var TALEN = [
     "en": "white",
     "es": "blanco",
     "plaatje": "⚪",
+    "afb": "tegels/tegel-wit.png",
     "niveau": 2
   },
   {
@@ -1170,6 +1333,7 @@ var TALEN = [
     "en": "soccer",
     "es": "fútbol",
     "plaatje": "⚽",
+    "afb": "tegels/tegel-voetbal.png",
     "niveau": 2
   },
   {
@@ -1177,6 +1341,7 @@ var TALEN = [
     "en": "music",
     "es": "música",
     "plaatje": "🎵",
+    "afb": "tegels/tegel-muziek.png",
     "niveau": 2
   },
   {
@@ -1184,6 +1349,7 @@ var TALEN = [
     "en": "guitar",
     "es": "guitarra",
     "plaatje": "🎸",
+    "afb": "tegels/tegel-gitaar.png",
     "niveau": 3
   },
   {
@@ -1191,6 +1357,7 @@ var TALEN = [
     "en": "drum",
     "es": "tambor",
     "plaatje": "🥁",
+    "afb": "tegels/tegel-trommel.png",
     "niveau": 3
   },
   {
@@ -1198,6 +1365,7 @@ var TALEN = [
     "en": "kite",
     "es": "cometa",
     "plaatje": "🪁",
+    "afb": "tegels/tegel-vlieger.png",
     "niveau": 3
   },
   {
@@ -1205,6 +1373,7 @@ var TALEN = [
     "en": "block",
     "es": "bloque",
     "plaatje": "🧱",
+    "afb": "tegels/tegel-blokje.png",
     "niveau": 1
   },
   {
@@ -1212,6 +1381,7 @@ var TALEN = [
     "en": "puzzle",
     "es": "rompecabezas",
     "plaatje": "🧩",
+    "afb": "tegels/tegel-puzzel.png",
     "niveau": 2
   },
   {
@@ -1219,6 +1389,7 @@ var TALEN = [
     "en": "robot",
     "es": "robot",
     "plaatje": "🤖",
+    "afb": "tegels/tegel-robot.png",
     "niveau": 2
   },
   {
@@ -1226,6 +1397,7 @@ var TALEN = [
     "en": "dragon",
     "es": "dragón",
     "plaatje": "🐉",
+    "afb": "tegels/tegel-draak.png",
     "niveau": 2
   },
   {
@@ -1233,6 +1405,7 @@ var TALEN = [
     "en": "dinosaur",
     "es": "dinosaurio",
     "plaatje": "🦕",
+    "afb": "tegels/tegel-dinosaurus.png",
     "niveau": 2
   },
   {
@@ -1240,6 +1413,7 @@ var TALEN = [
     "en": "unicorn",
     "es": "unicornio",
     "plaatje": "🦄",
+    "afb": "tegels/tegel-eenhoorn.png",
     "niveau": 2
   },
   {
@@ -1247,6 +1421,7 @@ var TALEN = [
     "en": "ghost",
     "es": "fantasma",
     "plaatje": "👻",
+    "afb": "tegels/tegel-spook.png",
     "niveau": 2
   },
   {
@@ -1254,6 +1429,7 @@ var TALEN = [
     "en": "worm",
     "es": "gusano",
     "plaatje": "🪱",
+    "afb": "tegels/tegel-worm.png",
     "niveau": 2
   },
   {
@@ -1261,6 +1437,7 @@ var TALEN = [
     "en": "sausage",
     "es": "salchicha",
     "plaatje": "🌭",
+    "afb": "tegels/tegel-worst.png",
     "niveau": 2
   },
   {
@@ -1268,6 +1445,7 @@ var TALEN = [
     "en": "popcorn",
     "es": "palomitas",
     "plaatje": "🍿",
+    "afb": "tegels/tegel-popcorn.png",
     "niveau": 2
   },
   {
@@ -1275,6 +1453,7 @@ var TALEN = [
     "en": "donut",
     "es": "dona",
     "plaatje": "🍩",
+    "afb": "tegels/tegel-donut.png",
     "niveau": 2
   },
   {
@@ -1282,6 +1461,7 @@ var TALEN = [
     "en": "christmas tree",
     "es": "árbol de navidad",
     "plaatje": "🎄",
+    "afb": "tegels/tegel-kerstboom.png",
     "niveau": 2
   },
   {
@@ -1289,6 +1469,7 @@ var TALEN = [
     "en": "snowman",
     "es": "muñeco de nieve",
     "plaatje": "⛄",
+    "afb": "tegels/tegel-sneeuwpop.png",
     "niveau": 2
   },
   {
@@ -1296,6 +1477,7 @@ var TALEN = [
     "en": "candle",
     "es": "vela",
     "plaatje": "🕯️",
+    "afb": "tegels/tegel-kaars.png",
     "niveau": 2
   },
   {
@@ -1303,6 +1485,7 @@ var TALEN = [
     "en": "tent",
     "es": "tienda",
     "plaatje": "⛺",
+    "afb": "tegels/tegel-tent.png",
     "niveau": 2
   },
   {
@@ -1310,6 +1493,7 @@ var TALEN = [
     "en": "ski",
     "es": "esquí",
     "plaatje": "🎿",
+    "afb": "tegels/tegel-ski.png",
     "niveau": 3
   },
   {
@@ -1317,6 +1501,7 @@ var TALEN = [
     "en": "anchor",
     "es": "ancla",
     "plaatje": "⚓",
+    "afb": "tegels/tegel-anker.png",
     "niveau": 3
   },
   {
@@ -1324,6 +1509,7 @@ var TALEN = [
     "en": "compass",
     "es": "brújula",
     "plaatje": "🧭",
+    "afb": "tegels/tegel-kompas.png",
     "niveau": 3
   },
   {
@@ -1331,6 +1517,7 @@ var TALEN = [
     "en": "violin",
     "es": "violín",
     "plaatje": "🎻",
+    "afb": "tegels/tegel-viool.png",
     "niveau": 3
   },
   {
@@ -1338,6 +1525,7 @@ var TALEN = [
     "en": "trumpet",
     "es": "trompeta",
     "plaatje": "🎺",
+    "afb": "tegels/tegel-trompet.png",
     "niveau": 3
   },
   {
@@ -1345,6 +1533,7 @@ var TALEN = [
     "en": "microphone",
     "es": "micrófono",
     "plaatje": "🎤",
+    "afb": "tegels/tegel-microfoon.png",
     "niveau": 3
   },
   {
@@ -1352,6 +1541,7 @@ var TALEN = [
     "en": "headphones",
     "es": "auriculares",
     "plaatje": "🎧",
+    "afb": "tegels/tegel-koptelefoon.png",
     "niveau": 3
   },
   {
@@ -1359,6 +1549,7 @@ var TALEN = [
     "en": "parachute",
     "es": "paracaídas",
     "plaatje": "🪂",
+    "afb": "tegels/tegel-parachute.png",
     "niveau": 3
   }
 ];
