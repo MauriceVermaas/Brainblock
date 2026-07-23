@@ -83,7 +83,9 @@ button:disabled{opacity:.5}
 /* ==== HUD ==== */
 #hud{
   position:sticky; top:0; z-index:50; display:flex; flex-wrap:wrap; gap:.4em;
-  align-items:center; padding:.5em .7em; background:var(--hud); color:#fff;
+  align-items:center; background:var(--hud); color:#fff;
+  /* iOS safe-area: houd de balk (incl. ☰-menu) onder de camera/Dynamic Island en uit de schermranden */
+  padding:calc(.5em + env(safe-area-inset-top, 0px)) calc(.7em + env(safe-area-inset-right, 0px)) .5em calc(.7em + env(safe-area-inset-left, 0px));
 }
 #hud .naam{font-weight:700}
 #hud .xpbalk{flex:1; min-width:90px; height:16px; background:#0004; border-radius:10px; overflow:hidden}
@@ -449,7 +451,7 @@ body[data-leesfont="lexend"]{ --leesfont:'Lexend','Andika',system-ui,sans-serif;
 /* =========================================================================
    BLOKWERELD — hoofdscript. Logica strikt gescheiden van vormgeving.
    ========================================================================= */
-var APP_VERSIE = "3.35.0";
+var APP_VERSIE = "3.35.1";
 
 /* ---- Thema's: nieuwe skin = alleen dit object + de CSS-blokken hierboven ---- */
 var THEMAS = {
