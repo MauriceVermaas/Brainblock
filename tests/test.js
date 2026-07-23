@@ -296,6 +296,12 @@ test('toegankelijkheid & doelgroep-instellingen (US-04/06/08/10/11)', ()=>{
   ctx.zetRustig(); eq(ctx.S.rustigeModus, true, 'US-06: rustige modus aan te zetten');
   ctx.zetVoorlezen(); eq(ctx.S.voorlezenAan, false, 'US-04: voorlezen apart uit');
   eq(ctx.S.geluidAan, true, 'US-04: geluidseffecten ongewijzigd');
+  // automatisch verder na X sec
+  eq(ctx.S.autoVerder, true, 'auto-verder default aan');
+  eq(ctx.S.autoVerderSec, 5, 'auto-verder default 5 sec');
+  ctx.stelAutoVerderSec(2); eq(ctx.S.autoVerderSec, 7, 'seconden ophogen kan');
+  ctx.stelAutoVerderSec(99); eq(ctx.S.autoVerderSec, 12, 'seconden maximaal 12');
+  ctx.zetAutoVerder(); eq(ctx.S.autoVerder, false, 'auto-verder uit te zetten');
 });
 test('oudertips-data is gevuld en het tips-scherm toont de spelletjes', ()=>{
   const T = require('../data/oudertips.js');

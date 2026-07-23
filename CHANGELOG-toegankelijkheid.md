@@ -45,5 +45,8 @@ Alle 12 stories uit het UX-rapport zijn verwerkt, rechtstreeks in deze projectma
 
 Nog op de wensenlijst (volgende stap): blokken kunnen kleuren (verfkwast) en bouwsels bewaren/delen.
 
+## Automatisch verder (v3.35.0)
+Naast de Verder-knop kan het spel na een instelbaar aantal seconden (2–12, standaard 5) automatisch doorgaan, met een zichtbaar aftellen. Instelbaar via ⚙️ Instellingen → Rust & focus. In de rustige modus gaat het nooit vanzelf verder (dan blijft alleen de Verder-knop), zodat kinderen die meer tijd nodig hebben de regie houden.
+
 ## Aandachtspunt voor deploy
 OpenDyslexic laadt nu via CDN. Voor volledig offline gebruik: lever het `.woff2`-bestand lokaal mee en vervang de CDN-URL in de `@font-face`-regel door een relatief pad. Andika/Lexend werken zoals voorheen via de bestaande Google-Fonts-link.
